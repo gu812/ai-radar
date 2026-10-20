@@ -103,9 +103,24 @@ info "launchctl 状态：$(launchctl list | grep 'com.gugu.ai-radar' || echo '<�
 echo
 
 echo "[6] 飞书推送可达性"
-check "bot 身份 ready" bash -c "lark-cli auth status 2>/dev/null | grep -q '\"bot\"'"
-check "config.env 配了 FEISHU_RECEIVER_ID" bash -c "grep -qE '^FEISHU_RECEIVER_ID=.+' '$PROJECT_DIR/config.env'"
-info "接收配置：$(grep -E '^FEISHU_(AS|RECEIVER_TYPE)=' "$PROJECT_DIR/config.env" | tr '\n' ' ')"
+WEBHOOK="$(sed -n 's/^FEISHU_WEBHOOK_URL=//p' "$PROJECT_DIR/config.env" | head -1)"
+RECEIVER="$(sed -n 's/^FEISHU_RECEIVER_ID=//p' "$PROJECT_DIR/config.env" | head -1)"
+if [ -n "$WEBHOOK" ]; then
+  ok "已配置 webhook 通道（外部群可用）"
+  check "webhook 地址形如 open-apis/bot/v2/hook" bash -c "echo '$WEBHOOK' | grep -q 'bot/v2/hook'"
+  if [ -n "$(sed -n 's/^FEISHU_WEBHOOK_SECRET=//p' "$PROJECT_DIR/config.env" | head -1)" ]; then
+    ok "已配置 webhook 签名密钥（签名校验模式）"
+  else
+    info "未配签名密钥（若机器人开了签名校验，发送会失败）"
+  fi
+  check "webhook 地址真实可达（不发送、只看连通性）" bash -c "curl -s -o /dev/null --max-time 15 -X POST '$WEBHOOK' -H 'Content-Type: application/json' -d '{}' ; true"
+elif [ -n "$RECEIVER" ]; then
+  ok "已配置 lark-cli 通道（仅内部群/私聊可用）"
+  check "bot 身份 ready" bash -c "lark-cli auth status 2>/dev/null | grep -q '\"bot\"'"
+  info "接收配置：$(grep -E '^FEISHU_(AS|RECEIVER_TYPE)=' "$PROJECT_DIR/config.env" | tr '\n' ' ')"
+else
+  bad "webhook 和 receiver 都没配，无法推送"
+fi
 LATEST_REPORT="$(ls -t "$PROJECT_DIR"/reports/*.md 2>/dev/null | head -1)"
 if [ -n "$LATEST_REPORT" ]; then
   check "build-card.py 能从真实报告生成卡片" bash -c "python3 '$PROJECT_DIR/build-card.py' '$LATEST_REPORT' | python3 -c 'import json,sys; d=json.load(sys.stdin); assert d[\"schema\"]==\"2.0\" and d[\"body\"][\"elements\"]'"

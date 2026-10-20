@@ -35,21 +35,34 @@ FEISHU_RECEIVER_ID=ou_xxx
 REPORT_BASE_URL=https://github.com/<owner>/ai-radar/blob/main   # 留空则卡片不出按钮
 ```
 
-### 从私聊切到群聊
+### 发到群里：先看群类型
 
-机器人按 bot 身份发消息，**必须先在目标群里**，否则 API 直接拒绝。
+| 群类型 | 可用通道 | 说明 |
+|---|---|---|
+| **外部群**（含非本组织成员） | **只能**用自定义机器人 Webhook | 飞书限制：外部群仅支持「自定义机器人」与「已开启对外共享的机器人」。自建应用默认不对外共享，需企业认证才能开 |
+| 内部群 / 私聊 | webhook 或 lark-cli 应用机器人 | lark-cli 需先把机器人加进群，机器人得先在群里 |
 
-1. 在飞书里打开目标群 → 群设置 → 群机器人 → 添加机器人 → 搜索应用 `cli_aa3a21d2f0b91ccd`（或它的应用名）
-2. 加完后拿 chat_id：
+**Webhook（外部群唯一可靠路径）**
+
+1. 群设置 → 群机器人 → 添加机器人 → 自定义机器人 → 起个名字
+2. 安全设置选 **签名校验**，把密钥和 webhook URL 一起填进 `config.env`：
+   ```
+   FEISHU_WEBHOOK_URL=https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxxxx
+   FEISHU_WEBHOOK_SECRET=xxxxxxxx
+   ```
+   选「自定义关键词」的话，关键词填 `AI Radar`（卡片标题含这个词），secret 留空
+3. 验证：`./push-feishu.sh --dry-run` 看卡片 JSON，再 `./push-feishu.sh` 真发
+
+webhook 配了就走 webhook，`FEISHU_RECEIVER_*` 自动失效，不用删。
+
+**lark-cli（只能内部群/私聊）**
+
+1. 群设置 → 群机器人 → 添加机器人 → 搜应用名（按名字搜，**搜 appId 搜不到**）
+2. 拿 chat_id：
    ```bash
    lark-cli im +chat-list --as bot --format json | python3 -m json.tool | grep -E '"chat_id"|"name"'
    ```
-3. 改 `config.env`：
-   ```
-   FEISHU_RECEIVER_TYPE=chat
-   FEISHU_RECEIVER_ID=oc_xxxxxxxx
-   ```
-4. 验证：`./push-feishu.sh --dry-run` 看卡片 JSON，再 `./push-feishu.sh` 真发
+3. 改 `config.env`：`FEISHU_RECEIVER_TYPE=chat` + `FEISHU_RECEIVER_ID=oc_xxxxxxxx`
 
 注意：私有 GitHub 仓库的链接，群成员点开需要登录且有权限；要所有人都能看全文就得用公开仓库。
 
