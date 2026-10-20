@@ -35,6 +35,24 @@ FEISHU_RECEIVER_ID=ou_xxx
 REPORT_BASE_URL=https://github.com/<owner>/ai-radar/blob/main   # 留空则卡片不出按钮
 ```
 
+### 从私聊切到群聊
+
+机器人按 bot 身份发消息，**必须先在目标群里**，否则 API 直接拒绝。
+
+1. 在飞书里打开目标群 → 群设置 → 群机器人 → 添加机器人 → 搜索应用 `cli_aa3a21d2f0b91ccd`（或它的应用名）
+2. 加完后拿 chat_id：
+   ```bash
+   lark-cli im +chat-list --as bot --format json | python3 -m json.tool | grep -E '"chat_id"|"name"'
+   ```
+3. 改 `config.env`：
+   ```
+   FEISHU_RECEIVER_TYPE=chat
+   FEISHU_RECEIVER_ID=oc_xxxxxxxx
+   ```
+4. 验证：`./push-feishu.sh --dry-run` 看卡片 JSON，再 `./push-feishu.sh` 真发
+
+注意：私有 GitHub 仓库的链接，群成员点开需要登录且有权限；要所有人都能看全文就得用公开仓库。
+
 环境变量覆盖：`AI_RADAR_MODEL`（默认 `deepseek/deepseek-flash`）、`AI_RADAR_THINKING`、
 `AI_RADAR_TIMEOUT`（1800s）、`AI_RADAR_ATTEMPTS`（2）、`AI_RADAR_BUDGET_SEARCH/FETCH`（12/12）、
 `AI_RADAR_CITATION_STRICT`、`AI_RADAR_NO_PUSH`、`AI_RADAR_NO_FEISHU`。
