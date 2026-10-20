@@ -38,13 +38,22 @@ REPORT="$PROJECT_DIR/reports/$DATE.md"
 LOG="$LOG_DIR/$DATE.log"
 log() { printf '[%s] feishu: %s\n' "$(date '+%F %T')" "$*" >>"$LOG"; }
 
-# 配置：先 config.env，再让真实环境变量覆盖
+# 配置：环境变量优先于 config.env（注释和实现必须一致——早期版本 source 之后会反向覆盖）
+# 用 ${VAR-__unset__} 区分「没设置」和「显式设成空」：设空可以临时禁用某个通道。
+_SAVED_WEBHOOK="${FEISHU_WEBHOOK_URL-__unset__}"
+_SAVED_SECRET="${FEISHU_WEBHOOK_SECRET-__unset__}"
+_SAVED_RECEIVER="${FEISHU_RECEIVER_ID-__unset__}"
+_SAVED_BASE="${REPORT_BASE_URL-__unset__}"
 if [ -r "$PROJECT_DIR/config.env" ]; then
   set -a
   # shellcheck disable=SC1091
   . "$PROJECT_DIR/config.env"
   set +a
 fi
+[ "$_SAVED_WEBHOOK" != "__unset__" ] && FEISHU_WEBHOOK_URL="$_SAVED_WEBHOOK"
+[ "$_SAVED_SECRET" != "__unset__" ] && FEISHU_WEBHOOK_SECRET="$_SAVED_SECRET"
+[ "$_SAVED_RECEIVER" != "__unset__" ] && FEISHU_RECEIVER_ID="$_SAVED_RECEIVER"
+[ "$_SAVED_BASE" != "__unset__" ] && REPORT_BASE_URL="$_SAVED_BASE"
 WEBHOOK_URL="${FEISHU_WEBHOOK_URL:-}"
 WEBHOOK_SECRET="${FEISHU_WEBHOOK_SECRET:-}"
 FEISHU_AS="${FEISHU_AS:-bot}"
