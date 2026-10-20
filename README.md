@@ -99,6 +99,27 @@ ai-radar/
 └── com.gugu.ai-radar.plist
 ```
 
+## 抓取通道与实测限制
+
+`fetch.sh` 两级策略：**先直连，非 200 时自动走 `FETCH_PROXY` 重试**。别全走代理——`anthropic.com`、`artificialanalysis.ai` 直连就 200，多一跳只是白白慢一拍。
+
+JSON 响应**原样透传**（API 数据被 HTML 去标签会直接干掉结构），HTML 则去 script/style/标签后输出正文。
+
+2026-10-20 在本机实测（`direct` = 直连，`proxy` = 代理重试后才通）：
+
+| 源 | 结果 |
+|---|---|
+| artificialanalysis.ai / openrouter.ai/rankings | ✅ direct 200 |
+| anthropic.com / github.blog / techcrunch.com | ✅ direct 200 |
+| huggingface.co（页面 + `/api/models`） | ✅ proxy 200（直连 000） |
+| news.ycombinator.com / firebaseio.com | ✅ proxy 200 |
+| github.com/trending | ⚠️ 200 但页面由 JS 渲染，只有导航壳 |
+| lmarena.ai | ❌ 403 Cloudflare；HF Spaces 镜像 200 但是 JS 应用，同样只有壳 |
+| openai.com | ❌ 403 Cloudflare，代理无效 |
+| gartner.com / investing.com | ❌ 403 |
+
+结论：**榜单数据优先用 Hugging Face trending API、Artificial Analysis、OpenRouter**（这三家能拿到真实数字）；LMArena 和 GitHub Trending 拿不到官方页，只能用二手报道支撑，`prompt.md` 里已经写明“别浪费抓取额度去试”。
+
 ## 质量护栏（沿用原版设计）
 
 - **每条必须有真实来源 URL**；断言带可信度（【已证实】/【厂商宣称】/【推测】）× 来源层级（【一手】/【二手】/【社媒线索】）双标签。

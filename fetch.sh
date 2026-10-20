@@ -29,14 +29,14 @@ fi
 TMP="$(mktemp -t airadar-fetch)"
 trap 'rm -f "$TMP"' EXIT
 
-# 抓一次，把 HTTP 码打到 stdout
+# 抓一次，把 HTTP 码与 content-type 打到 stdout
 # 不用 "${arr[@]}" 传参：macOS 自带 bash 3.2 在 set -u 下展开空数组会报 unbound variable
 do_curl() {
   curl -sL --compressed --max-time 40 \
     -A "$UA" "$@" \
     -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' \
     -H 'Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8' \
-    -w '%{http_code}' -o "$TMP" "$URL" 2>/dev/null
+    -w '%{http_code}|%{content_type}' -o "$TMP" "$URL" 2>/dev/null
 }
 
 try_fetch() { # mode(direct|proxy)
@@ -47,14 +47,16 @@ try_fetch() { # mode(direct|proxy)
   fi
 }
 
-channel="direct"; code="$(try_fetch direct)"
+channel="direct"; raw="$(try_fetch direct)"
+code="${raw%%|*}"; ctype="${raw#*|}"
 # 000 = 连不上，403/429/5xx = 被拦或服务端异常；这两种都值得换代理再试一次
 if [ "$code" != "200" ] && [ -n "$PROXY" ]; then
   case "$code" in
     000|403|429|5??)
-      code2="$(try_fetch proxy)"
+      raw2="$(try_fetch proxy)"
+      code2="${raw2%%|*}"
       if [ "$code2" = "200" ] || [ "$code2" != "000" ]; then
-        channel="proxy"; code="$code2"
+        channel="proxy"; code="$code2"; ctype="${raw2#*|}"
       fi
       ;;
   esac
@@ -70,6 +72,15 @@ if [ "$code" != "200" ]; then
   echo "抓取失败：HTTP $code  ${URL}（通道 ${channel}${PROXY:+，已尝试代理}）" >&2
   exit 1
 fi
+
+# JSON 响应原样输出：API 数据被 HTML 去标签会直接干掉结构
+case "$ctype" in
+  *json*)
+    head -c "$MAX" "$TMP"
+    [ "$(wc -c <"$TMP")" -gt "$MAX" ] && printf '\n…（已截断到 %s 字节）\n' "$MAX"
+    exit 0
+    ;;
+esac
 
 python3 - "$TMP" "$MAX" <<'PY'
 import html as htmllib

@@ -71,6 +71,10 @@ check "已移除 systemd 依赖" bash -c "! grep -q 'systemctl' '$PROJECT_DIR/ru
 check "已移除 notify-send 依赖" bash -c "! grep -v '^[[:space:]]*#' '$PROJECT_DIR/run.sh' | grep -q 'notify-send'"
 check "无效报告会触发重试" grep -qF '报告可能凭空生成' "$PROJECT_DIR/run.sh"
 check "sessions 与 fetch 记账也会被清理" grep -qF "prune \"\$SESSION_DIR\" '*.tsv'" "$PROJECT_DIR/run.sh"
+check "fetch.sh 直连失败会走代理重试" grep -qF 'try_fetch proxy' "$PROJECT_DIR/fetch.sh"
+check "fetch.sh 支持 JSON 透传（API 不被 HTML 清洗）" grep -qF '*json*)' "$PROJECT_DIR/fetch.sh"
+check "fetch.sh 不会 source 整个 config.env" bash -c "! grep -qE '^[[:space:]]*\.[[:space:]]+.*config\.env' '$PROJECT_DIR/fetch.sh'"
+check "run.sh 只 export FETCH_PROXY（不把 webhook 凭据喂给 agent）" bash -c "! grep -qE '^[[:space:]]*\.[[:space:]]+.*config\.env' '$PROJECT_DIR/run.sh' && grep -q 'export FETCH_PROXY' '$PROJECT_DIR/run.sh'"
 echo
 
 echo "[4] 运行前提"
@@ -90,6 +94,14 @@ check "DeepSeek Search API 真实可达" bash -c "
     -H \"Authorization: Bearer \$K\" -H 'Content-Type: application/json' \
     -d '{\"query\":\"selftest\",\"max_results\":1}' | grep -q 200"
 check "fetch.sh 能抓到真实正文" bash -c "cd '$PROJECT_DIR' && ./fetch.sh https://techcrunch.com/ 300 | grep -q ."
+PROXY_CONF="$(sed -n 's/^FETCH_PROXY=//p' "$PROJECT_DIR/config.env" | head -1)"
+if [ -n "$PROXY_CONF" ]; then
+  info "代理配置：$PROXY_CONF"
+  check "被墙站能通过代理降级抓到（huggingface.co）" bash -c "cd '$PROJECT_DIR' && ./fetch.sh https://huggingface.co 100 | grep -q ."
+  check "JSON API 透传可用（HF trending）" bash -c "cd '$PROJECT_DIR' && ./fetch.sh 'https://huggingface.co/api/models?sort=trendingScore&direction=-1&limit=2' 200 | grep -q trendingScore"
+else
+  info "未配置 FETCH_PROXY，被墙站（huggingface.co 等）将抓不到"
+fi
 echo
 
 echo "[5] 定时任务（launchd）"
