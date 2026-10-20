@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.gugu.ai-radar</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/gugu/code/my/ai-radar/run.sh</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/gugu/code/my/ai-radar</string>
+
+  <!-- 每天 08:30；机器睡眠错过时，launchd 会在唤醒后补跑一次 -->
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>8</integer>
+    <key>Minute</key>
+    <integer>30</integer>
+  </dict>
+
+  <!-- launchd 不读 shell 配置，PATH 必须写全，否则找不到 pi / lark-cli / gh -->
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/Users/gugu/.pi/agent/bin:/Users/gugu/.npm-global/bin:/Users/gugu/.local/bin:/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    <key>HOME</key>
+    <string>/Users/gugu</string>
+    <key>LANG</key>
+    <string>zh_CN.UTF-8</string>
+  </dict>
+
+  <key>StandardOutPath</key>
+  <string>/Users/gugu/code/my/ai-radar/logs/launchd.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/gugu/code/my/ai-radar/logs/launchd.err.log</string>
+
+  <key>RunAtLoad</key>
+  <false/>
+  <key>ProcessType</key>
+  <string>Background</string>
+</dict>
+</plist>
