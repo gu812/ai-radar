@@ -43,10 +43,17 @@
    - **运行器会交叉核对**：凡标了【一手】的断言行，其引用 URL 必须在本轮真的被 `./fetch.sh` 抓过；只凭搜索摘要拿到的，老老实实标【二手】并在《抓取说明》里写明，不要硬贴【一手】。
 4. **周度与趋势检索**（这一节必须真的检索，不要只汇总本地文件）：
    - 先读窗口内本地报告：`reports/` 中日期在 `{{WEEK_START}}` ~ `{{DATE}}` 的报告，抽取其中的产品条目与《热度榜与风评》记录——这是趋势对比基线。
-   - 再检索热度/排名/风评信号，候选来源（按当日可得性选 3 个以上，不要只用一个榜单）：LMArena、Artificial Analysis、OpenRouter 用量榜、GitHub Trending 与 star 增量、Hugging Face trending、应用商店排名、Product Hunt、Hacker News 点数、Reddit r/LocalLLaMA 口碑、G2/专业评测。
+   - 再检索热度/排名/风评信号。**下列 URL 是本机实测可达的，按可达性排序，选 3 个以上、不要只用一个榜单**：
+     1. Artificial Analysis 模型榜 —— `https://artificialanalysis.ai/leaderboards/models`（直连可达）
+     2. OpenRouter 用量榜 —— `https://openrouter.ai/rankings`（直连可达）
+     3. GitHub Trending —— `https://github.com/trending`（直连可达）
+     4. LMArena 榜单 —— 主站 `lmarena.ai` 是 Cloudflare 403 抓不到，**改抓镜像** `https://huggingface.co/spaces/lmarena-ai/chatbot-arena-leaderboard`
+     5. Hacker News —— `https://news.ycombinator.com/`
+     6. 补充来源：Hugging Face trending、应用商店排名、Reddit r/LocalLLaMA 口碑、Product Hunt、G2/专业评测
    - 目标：凑出 5–10 条能横向比较的变化（谁上升、谁下滑、谁被质疑），而不是罗列产品名。
-   - **至少覆盖 2 个不同来源的名次/口碑数据**（榜单或社区风评均可），周度部分至少用掉 2 次检索。首位来源拿不到就换下一个（LMArena → Artificial Analysis → OpenRouter → Hugging Face trending → GitHub Trending → HN/Reddit），**不要用单一来源支撑全部趋势判断**；确实只有单一来源时，必须在《趋势解读》里明确标注「单一来源，待交叉验证」。
-   - 检索走 DeepSeek 原生 Search API（`web_search` 工具），返回的是带 URL、日期、站点名的 ranked 结果。榜单类页面（LMArena / Artificial Analysis / OpenRouter）的位次和分数经常不出现在搜索摘要里，**这类页面直接 `./fetch.sh` 抓正文拿数字**，不要用摘要里的印象值。
+   - **至少覆盖 2 个不同来源的名次/口碑数据**（榜单或社区风评均可），周度部分至少用掉 2 次检索。上面某个来源抓不到就换下一个，**不要用单一来源支撑全部趋势判断**；确实只有单一来源时，必须在《趋势解读》里明确标注「单一来源，待交叉验证」。
+   - 检索走 DeepSeek 原生 Search API（`web_search` 工具），返回的是带 URL、日期、站点名的 ranked 结果。榜单类页面（Artificial Analysis / OpenRouter / LMArena）的位次和分数经常不出现在搜索摘要里，**这类页面直接 `./fetch.sh` 抓正文拿数字**，不要用摘要里的印象值。
+   - 代理是自动的：`fetch.sh` 先直连，直连失败（比如 huggingface.co 被墙）会自动走代理重试，你不用管，也不用自己加 `-x`。`openai.com` 是 Cloudflare 反爬，代理也拿不到，遇到就把该条降级为【二手】或改用其他一手来源。
 5. **写日报**：写入 `reports/{{DATE}}.md`，使用下方模板。缺失的章节写「今日无」，**不要删标题**；四个必备标题（今日必读 / 最近一周产品情况 / 热度榜与风评 / 抓取说明）必须原样出现。
 6. **更新索引**：在 `INDEX.md` 的表格中插入今天这一行（**最新在最上**），格式：
    `| {{DATE}} | <首要动态一句话> | [报告](reports/{{DATE}}.md) |`

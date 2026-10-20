@@ -52,6 +52,11 @@ PI_BIN="${AI_RADAR_PI_BIN:-$(command -v pi)}"
 mkdir -p "$LOG_DIR" "$SESSION_DIR" "$PROJECT_DIR/reports"
 log() { printf '[%s] %s\n' "$(date '+%F %T')" "$*" >>"$LOG"; }
 
+# 只把 fetch.sh 需要的代理传进 pi 的运行环境。
+# 绝不 source 整个 config.env：里面有 webhook 凭据，pi 的 bash 工具和 session 都能看到它。
+FETCH_PROXY="$(sed -n 's/^FETCH_PROXY=//p' "$PROJECT_DIR/config.env" 2>/dev/null | head -1)"
+[ -n "$FETCH_PROXY" ] && export FETCH_PROXY
+
 # 抓取取证落账文件：fetch.sh 每抓一次追加一行（URL<TAB>HTTP码）
 export AI_RADAR_FETCH_LOG="$SESSION_DIR/fetch-$SESSION_ID.tsv"
 : >"$AI_RADAR_FETCH_LOG"
