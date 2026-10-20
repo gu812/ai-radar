@@ -66,9 +66,9 @@ check "预算由 run.sh 注入提示词" grep -qF '{{BUDGET_FETCH}}' "$PROJECT_D
 check "抓取取证走 fetch.sh 记账" grep -qF 'AI_RADAR_FETCH_LOG' "$PROJECT_DIR/run.sh"
 check "fetch.sh 会写入取证记账" grep -qF 'AI_RADAR_FETCH_LOG' "$PROJECT_DIR/fetch.sh"
 check "macOS 无 timeout：改用 perl alarm" grep -qF "perl -e 'alarm shift; exec @ARGV'" "$PROJECT_DIR/run.sh"
-check "BSD find 无 -delete：改用 -exec rm" bash -c "! grep -q 'find .*-delete' '$PROJECT_DIR/run.sh'"
+check "BSD find 无 -delete：改用 -exec rm" bash -c "! grep -v '^[[:space:]]*#' '$PROJECT_DIR/run.sh' | grep -q -- '-delete'"
 check "已移除 systemd 依赖" bash -c "! grep -q 'systemctl' '$PROJECT_DIR/run.sh'"
-check "已移除 notify-send 依赖" bash -c "! grep -q 'notify-send' '$PROJECT_DIR/run.sh'"
+check "已移除 notify-send 依赖" bash -c "! grep -v '^[[:space:]]*#' '$PROJECT_DIR/run.sh' | grep -q 'notify-send'"
 check "无效报告会触发重试" grep -qF '报告可能凭空生成' "$PROJECT_DIR/run.sh"
 check "sessions 与 fetch 记账也会被清理" grep -qF "prune \"\$SESSION_DIR\" '*.tsv'" "$PROJECT_DIR/run.sh"
 echo
@@ -80,7 +80,7 @@ check "curl 在 PATH" command -v curl
 check "lark-cli 在 PATH" command -v lark-cli
 MODEL="${AI_RADAR_MODEL:-$(sed -n 's/^MODEL="\${AI_RADAR_MODEL:-\(.*\)}"$/\1/p' "$PROJECT_DIR/run.sh" | head -1)}"
 info "run.sh 默认模型：${MODEL:-<未解析到>}"
-check "模型在 pi 模型中可见（$MODEL）" \
+check "模型在 pi 模型中可见（${MODEL}）" \
   bash -c "pi --list-models 2>/dev/null | awk '{print \$1\"/\"\$2}' | grep -qxF '$MODEL'"
 check "pi-web-search 已安装（提供 web_search）" bash -c "pi list 2>/dev/null | grep -q 'pi-web-search'"
 check "pi 凭据 auth.json 存在" test -r "$HOME/.pi/agent/auth.json"
@@ -96,7 +96,7 @@ echo "[5] 定时任务（launchd）"
 check "仓库内有 plist 模板" test -s "$PLIST_SRC"
 check "plist 已安装到 ~/Library/LaunchAgents" test -s "$PLIST_DST"
 check "plist 语法有效（plutil）" plutil -lint "$PLIST_DST"
-check "plist 配置为 08:30" bash -c "plutil -p '$PLIST_DST' | grep -q 'Hour => 8' && plutil -p '$PLIST_DST' | grep -q 'Minute => 30'"
+check "plist 配置为 08:30" bash -c "plutil -p '$PLIST_DST' | grep -q '\"Hour\" => 8' && plutil -p '$PLIST_DST' | grep -q '\"Minute\" => 30'"
 check "plist 的 PATH 含 pi 目录" bash -c "plutil -p '$PLIST_DST' | grep -q '.pi/agent/bin'"
 check "launchd 已加载该任务" bash -c "launchctl list | grep -q 'com.gugu.ai-radar'"
 info "launchctl 状态：$(launchctl list | grep 'com.gugu.ai-radar' || echo '<未加载>')"

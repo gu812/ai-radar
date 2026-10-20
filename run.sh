@@ -86,7 +86,7 @@ PROMPT="$(sed -e "s|{{WEEK_START}}|$WEEK_START|g" -e "s|{{DATE}}|$DATE|g" \
   "$PROJECT_DIR/prompt.md")"
 [ -n "$PROMPT" ] || { log "FATAL: prompt 渲染为空"; exit 2; }
 
-log "===== ai-radar $DATE 开始（model=$MODEL, thinking=$THINKING, attempts=$ATTEMPTS, week=$WEEK_START）====="
+log "===== ai-radar $DATE 开始（model=$MODEL, thinking=$THINKING, attempts=$ATTEMPTS, week=${WEEK_START}）====="
 
 status="fail"; attempt=0
 missing_sections=""; searches=0; fetches=0
@@ -173,7 +173,7 @@ while [ "$attempt" -lt "$ATTEMPTS" ]; do
   if [ "$ok" -eq 1 ]; then status="ok"; break; fi
 
   [ -z "$missing_sections" ] || log "无效：报告缺少必备章节：$missing_sections"
-  [ "$searches" -ge "$MIN_SEARCHES" ] || log "无效：本轮实际检索 $searches 次（需 ≥$MIN_SEARCHES），报告可能凭空生成"
+  [ "$searches" -ge "$MIN_SEARCHES" ] || log "无效：本轮实际检索 $searches 次（需 ≥${MIN_SEARCHES}），报告可能凭空生成"
   [ "$untraceable" -gt 0 ] && log "WARN: $untraceable 条引用无法在本轮会话中溯源：$untraceable_list"
   [ "$fh_unverified" -gt 0 ] && log "WARN: $fh_unverified 条【一手】断言的引用未被本轮抓取：$fh_unverified_list"
   if [ "$attempt" -lt "$ATTEMPTS" ]; then log "本次未产出有效报告，60s 后重试（复用同一 session）"; sleep 60; fi
@@ -191,15 +191,15 @@ if [ "$status" = "ok" ] && [ -n "$sess_file" ]; then
   if ! grep -q '信息来源（运行器写入）' "$REPORT"; then
     src_note="> **信息来源（运行器写入）**：检索通道 DeepSeek Search API（pi-web-search 扩展），抓取通道 curl + fetch.sh（失败即记 0，不重抓）。本轮真实调用：web_search ${searches} 次 / fetch_content ${fetches} 次（fetch_content 由 fetch.sh 记账）；引文溯源 $((total_cited - untraceable))/${total_cited} 条可在本轮会话中追溯；来源层级标注：一手 ${tier_first} 条 / 二手 ${tier_second} 条；一手取证：${fh_verified}/${fh_total} 条【一手】断言的引用确为本轮抓取过$( [ "$fh_unverified" -gt 0 ] && printf '，**其中 %s 条仅凭搜索摘要（应降级为【二手】）**' "$fh_unverified" )。"
     { head -1 "$REPORT"; printf '\n%s\n' "$src_note"; tail -n +2 "$REPORT"; } >"$REPORT.tmp" && mv "$REPORT.tmp" "$REPORT"
-    log "已写入来源披露（溯源 $((total_cited - untraceable))/$total_cited）"
+    log "已写入来源披露（溯源 $((total_cited - untraceable))/${total_cited}）"
   fi
   if ! grep -q '运行器取证' "$REPORT"; then
     printf -- '- 运行器取证（run.sh 解析 session + fetch.sh 记账，非模型自述）：web_search %s 次 / fetch_content %s 次（预算上限 %s / %s）\n' \
       "$searches" "$fetches" "$BUDGET_SEARCH" "$BUDGET_FETCH" >>"$REPORT"
     log "已追加运行器取证：检索 $searches / 抓取 $fetches"
   fi
-  [ "$searches" -gt "$BUDGET_SEARCH" ] && log "WARN: 超出检索预算（$searches > $BUDGET_SEARCH）"
-  [ "$fetches" -gt "$BUDGET_FETCH" ] && log "WARN: 超出抓取预算（$fetches > $BUDGET_FETCH）"
+  [ "$searches" -gt "$BUDGET_SEARCH" ] && log "WARN: 超出检索预算（$searches > ${BUDGET_SEARCH}）"
+  [ "$fetches" -gt "$BUDGET_FETCH" ] && log "WARN: 超出抓取预算（$fetches > ${BUDGET_FETCH}）"
   [ "$untraceable" -gt 0 ] && log "WARN: 存在无法溯源的引用，已在报告头部标明"
   [ "$social_cites" -gt 0 ] && log "WARN: 报告含 $social_cites 条社交平台引用（只能作线索，须回溯一手来源）"
 fi
@@ -248,7 +248,7 @@ if [ "$status" = "ok" ]; then
   [ -n "$push_note" ] && body="$body"$'\n'"$push_note"
   [ -n "$feishu_note" ] && body="$body"$'\n'"$feishu_note"
   notify "AI Radar $DATE · $(printf '%s\n' "$body" | grep -c '^•') 条必读" "$body"
-  log "===== 成功：$REPORT（$(wc -c <"$REPORT") 字节，检索 $searches / 抓取 $fetches）====="
+  log "===== 成功：${REPORT}（$(wc -c <"$REPORT") 字节，检索 $searches / 抓取 ${fetches}）====="
   exit 0
 fi
 
