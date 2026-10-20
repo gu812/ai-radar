@@ -87,7 +87,10 @@ def parse_runner_evidence(lines: list[str]) -> str:
     """取『运行器取证』那一行的统计，没有就返回空串。"""
     for line in lines:
         if "运行器取证" in line:
-            m = re.search(r"web_search\s*(\d+)\s*次\s*/\s*fetch_content\s*(\d+)\s*次", line)
+            m = re.search(
+                r"web_search\s*(\d+)\s*次\s*/\s*(?:fetch_content|抓取正文)\s*(\d+)\s*次",
+                line,
+            )
             if m:
                 return f"检索 {m.group(1)} 次 · 抓取 {m.group(2)} 次"
     return ""

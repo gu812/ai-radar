@@ -189,12 +189,12 @@ prune "$SESSION_DIR" '*.tsv' "$KEEP_LOG_DAYS"
 # 运行器举证：把可验证的事实写进报告本身
 if [ "$status" = "ok" ] && [ -n "$sess_file" ]; then
   if ! grep -q '信息来源（运行器写入）' "$REPORT"; then
-    src_note="> **信息来源（运行器写入）**：检索通道 DeepSeek Search API（pi-web-search 扩展），抓取通道 curl + fetch.sh（失败即记 0，不重抓）。本轮真实调用：web_search ${searches} 次 / fetch_content ${fetches} 次（fetch_content 由 fetch.sh 记账）；引文溯源 $((total_cited - untraceable))/${total_cited} 条可在本轮会话中追溯；来源层级标注：一手 ${tier_first} 条 / 二手 ${tier_second} 条；一手取证：${fh_verified}/${fh_total} 条【一手】断言的引用确为本轮抓取过$( [ "$fh_unverified" -gt 0 ] && printf '，**其中 %s 条仅凭搜索摘要（应降级为【二手】）**' "$fh_unverified" )。"
+    src_note="> **信息来源（运行器写入）**：检索通道 DeepSeek Search API（pi-web-search 扩展），抓取通道 curl + fetch.sh（失败即记 0，不重抓）。本轮真实调用：web_search ${searches} 次 / 抓取正文 ${fetches} 次（抓取由 fetch.sh 自己记账）；引文溯源 $((total_cited - untraceable))/${total_cited} 条可在本轮会话中追溯；来源层级标注：一手 ${tier_first} 条 / 二手 ${tier_second} 条；一手取证：${fh_verified}/${fh_total} 条【一手】断言的引用确为本轮抓取过$( [ "$fh_unverified" -gt 0 ] && printf '，**其中 %s 条仅凭搜索摘要（应降级为【二手】）**' "$fh_unverified" )。"
     { head -1 "$REPORT"; printf '\n%s\n' "$src_note"; tail -n +2 "$REPORT"; } >"$REPORT.tmp" && mv "$REPORT.tmp" "$REPORT"
     log "已写入来源披露（溯源 $((total_cited - untraceable))/${total_cited}）"
   fi
   if ! grep -q '运行器取证' "$REPORT"; then
-    printf -- '- 运行器取证（run.sh 解析 session + fetch.sh 记账，非模型自述）：web_search %s 次 / fetch_content %s 次（预算上限 %s / %s）\n' \
+    printf -- '- 运行器取证（run.sh 解析 session + fetch.sh 记账，非模型自述）：web_search %s 次 / 抓取正文 %s 次（预算上限 %s / %s）\n' \
       "$searches" "$fetches" "$BUDGET_SEARCH" "$BUDGET_FETCH" >>"$REPORT"
     log "已追加运行器取证：检索 $searches / 抓取 $fetches"
   fi
