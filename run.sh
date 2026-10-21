@@ -71,6 +71,18 @@ notify() { # title, body
   osascript -e "display notification \"${2//\"/\\\"}\" with title \"${1//\"/\\\"}\"" >/dev/null 2>&1 || true
 }
 
+# 飞书纯文本告警：用于“不是报告失败、而是根本跑不起来”的情况（余额不足、密钥失效）。
+# 不走卡片（卡片需要报告）、不依赖 push-feishu.sh（那边会先检查报告存在）。
+alert_feishu() { # text
+  local url payload
+  url="$(sed -n 's/^FEISHU_WEBHOOK_URL=//p' "$PROJECT_DIR/config.env" 2>/dev/null | head -1)"
+  [ -n "$url" ] || return 0
+  payload="$(TEXT="$1" python3 -c 'import json,os; print(json.dumps({"msg_type":"text","content":{"text":os.environ["TEXT"]}}, ensure_ascii=False))' 2>/dev/null)" || return 0
+  [ -n "$payload" ] || return 0
+  curl -s --max-time 15 -X POST "$url" -H 'Content-Type: application/json' \
+    -d "$payload" >/dev/null 2>&1 || true
+}
+
 # 从日报里抠出前 N 条「今日必读」的加粗结论，用于失败/降级时的兜底通知
 headlines() { # N
   awk -v limit="$1" '
@@ -101,14 +113,25 @@ while [ "$attempt" -lt "$ATTEMPTS" ]; do
   attempt=$((attempt + 1))
   log "-- attempt $attempt/$ATTEMPTS --"
   rm -f "$REPORT"
+  attempt_out="$SESSION_DIR/out-$SESSION_ID-$attempt.log"
   run_with_timeout "$RUN_TIMEOUT" \
     "$PI_BIN" --print --approve \
     --model "$MODEL" --thinking "$THINKING" \
     --name "ai-radar $DATE" --session-dir "$SESSION_DIR" --session-id "$SESSION_ID" \
     --tools read,write,edit,bash,web_search \
-    "$PROMPT" >>"$LOG" 2>&1
+    "$PROMPT" >"$attempt_out" 2>&1
   rc=$?
+  cat "$attempt_out" >>"$LOG" 2>/dev/null
   [ "$rc" -eq 142 ] && log "WARN: 超过 ${RUN_TIMEOUT}s 被强杀（alarm）"
+
+  # 账户级故障：重试无意义，立即止报而不是空烧到超时
+  if grep -q 'Insufficient Balance' "$attempt_out" 2>/dev/null; then
+    log "FATAL: ${MODEL} 返回 Insufficient Balance（余额不足），任务终止。重试无意义，已跳过剩余尝试。"
+    notify "AI Radar 余额不足" "${MODEL} 账户余额不足，今日日报未生成"
+    alert_feishu "【AI Radar 告警】${DATE} 日报未生成：${MODEL} 账户余额不足（Insufficient Balance）。充值后手动跑 ./run.sh ${DATE} 补上。"
+    rm -f "$attempt_out"
+    exit 3
+  fi
   size=0; [ -f "$REPORT" ] && size=$(wc -c <"$REPORT")
 
   # (a) 结构校验：必备章节标题是否齐全
@@ -190,6 +213,7 @@ prune "$PROJECT_DIR/reports" '*.md' "$KEEP_REPORT_DAYS"
 prune "$LOG_DIR" '*.log' "$KEEP_LOG_DAYS"
 prune "$SESSION_DIR" '*.jsonl' "$KEEP_LOG_DAYS"
 prune "$SESSION_DIR" '*.tsv' "$KEEP_LOG_DAYS"
+prune "$SESSION_DIR" 'out-*.log' "$KEEP_LOG_DAYS"
 
 # 运行器举证：把可验证的事实写进报告本身
 if [ "$status" = "ok" ] && [ -n "$sess_file" ]; then
