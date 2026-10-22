@@ -17,6 +17,8 @@
 
 - 状态：长期跟踪
 - 时间线（最新在最上）：
+  - 2026-10-22 — AA 榜首五个条目统一改标"with fallback"：Opus 5.5 (max with fallback) 58/$5.98、Sonnet 5.5 (max with fallback) 56/$5.46、Muse Wonder Full (max) 56/成本空白、GPT-6 Astra (max) 53/$3.26、DeepSeek 1017 (max) 45/$0.26【已证实】([来源](https://artificialanalysis.ai/leaderboards/models))
+  - 2026-10-22 — 判断："每任务成本"列已排除 fallback 路由的额外调用，跨配置横比需同时报配置档、fallback 策略与成本口径【推测】
   - 2026-10-21 — DeepSeek V4.1 Flash 1017 (max) 45 分 / $0.26 每任务、206 tok/s；同榜 GPT-6.1 Sol (max) 52 分 / $0.72、55 tok/s，GPT-6.1 Sol (high) 仍 50 / $0.32【已证实】([来源](https://artificialanalysis.ai/leaderboards/models))
   - 2026-10-21 — 判断：低价档前沿位从 $0.32 拉到 $0.26，中端 agent 流水线的默认档会继续下压【推测】
   - 2026-10-20 — Artificial Analysis 榜新增"每任务成本"列：Claude Opus 5.5 (max) 58 分/$5.98、Sonnet 5.5 (xhigh) 52 分/$2.01、Gemini 4 Argon (high) 53 分/$1.99、GPT-6.1 Sol (xhigh) 51 分/$0.39、(high) 50 分/$0.32【已证实】([来源](https://artificialanalysis.ai/leaderboards/models))
@@ -29,6 +31,8 @@
 
 - 状态：长期跟踪
 - 时间线（最新在最上）：
+  - 2026-10-22 — 周榜（through 10-21）：DeepSeek V4.1 Flash 25.7T 第 1（-31%）、1017 16.5T 第 2（新）、GLM 5.3 Flash 11.3T（-12%）、MiniMax M3.1 Flash (free) 10.3T 新上榜、MiMo-V2.6-Flash 8.57T（-25%）、Hy4 8.55T（+9%）、Claude Opus 5.5 7.14T 第 7（+26%）、GLM 5.3 5.21T（+18%）、Nemotron 3 Ultra (free) 4.46T（-40%）【已证实】([来源](https://openrouter.ai/rankings))
+  - 2026-10-22 — 应用日榜前十有 8 个非厂商壳：Claude Code 2.11T 第 1、Hermes Agent 2.07T 第 2、Kilo Code 1.49T、pi 651B、DeepSeek Harness 575B（new）、omp 533B（new）、Codex 339B、Freebuff 313B、OpenClaw 260B、Strix 252B（new）【已证实】([来源](https://openrouter.ai/rankings))
   - 2026-10-21 — 周榜（through 10-20）：DeepSeek V4.1 Flash 27.3T 第 1（-32%）、GLM 5.3 Flash 11.6T 第 2（-10%）、DeepSeek V4.1 Flash 1017 11.5T 第 3（新）、MiMo-V2.6-Flash 9.05T（-22%）、Hy4 preview 8.16T（+0%）、Claude Opus 5.5 6.8T 第 6（+21%）【已证实】([来源](https://openrouter.ai/rankings))
   - 2026-10-21 — 应用 token 日榜：Claude Code 2.24T 第 1（较 10-20 记录的 1.69T +32%）、Hermes Agent 1.87T 第 2，DeepSeek Harness 491B 与 omp 430B 新上榜【已证实】([来源](https://openrouter.ai/rankings))
   - 2026-10-21 — 判断：总量在缩而 Claude 在涨，降价不再带来增量；编码应用层被非厂商脚手架挤开（单一来源，待交叉验证）【推测】
@@ -42,6 +46,8 @@
 
 - 状态：关注中
 - 时间线（最新在最上）：
+  - 2026-10-22 — Claude Code 2.1.307：`/claude-api api-version` 把代码迁到 Claude API 版本 `2026-10-21`（自 2023-06-01 后首次换版本），新增 `claude_code.safety_event` OTel 事件覆盖权限规则/auto mode/安全检查/hook/沙箱拦截点；2.1.308 仅 bug fix【已证实】([来源](https://code.claude.com/docs/en/changelog.md))
+  - 2026-10-22 — 判断：API 版本换代 + 拦截点遥测，是给"自建 gateway 的企业客户"上计量与审计伏笔，与 Codex 的 MCP 企业认证改造同向【推测】
   - 2026-10-21 — Claude Code 2.1.305：新增 `sandbox.allowNestedUserNamespaces`（changelog 原话称可绕过沙箱文件保护）、修 2.1.304 的 tool search 回归（Vertex/Bedrock 请求全失败）、Code Review 复审不再带未关阻塞项直接 LGTM；该页未标发布日期【已证实】([来源](https://code.claude.com/docs/en/changelog.md))
   - 2026-10-20 — Claude Code 2.1.304（10-19）主动加"恢复旧会话会吃掉 5 小时额度"的 Pro/Max 警告；2.1.302（10-16）fork 子 agent 默认开启、`claude -p` 在第三方 provider/遥测关闭/全新安装下默认回 default 权限模式【已证实+二手】([来源](https://code.claude.com/docs/en/changelog.md))
   - 2026-10-19 — Claude Code 2.1.304：/auto-mode-setup、Code Review 三档、mods 工具权限事件【已证实】([来源](https://code.claude.com/docs/en/changelog.md))
@@ -51,6 +57,9 @@
 
 - 状态：长期跟踪
 - 时间线（最新在最上）：
+  - 2026-10-22 — GTC Berlin：Vera Rubin 上 Google Cloud A5X（NVL72 + ConnectX-9 + 第四代液冷），下月 GA 并扩至欧洲，规划最多 96 万颗 Rubin，首位客户 Ineffable Intelligence；Spectrum-X CPO 以太网交换机进入全面量产【已证实（合作/日程）】([来源](https://blogs.nvidia.com/gtc-berlin-2026-news/))
+  - 2026-10-22 — NVIDIA 口径：3,000 亿美元设备积压、200GW 项目卡在美国并网队列，DSX 卖"把电网与 AI 工厂当一个系统规划"；Revolut 以 PRAGMA 单模型跑 Blackwell Ultra 服务 8,000 万客户【厂商宣称】([来源](https://blogs.nvidia.com/gtc-berlin-2026-news/))
+  - 2026-10-22 — 判断：14 天装机解决不了三年并网排队，算力扩张的瓶颈从芯片转到电力接入与变压器交付【推测】
   - 2026-10-21 — GTC Berlin 主题演讲定于 10-21 11:00–13:00 CEST（北京 17:00），官方议程以主权 AI 与欧洲 AI 原生公司为主；会前"Rubin 降本 10–45×"仅厂商口径，未采用【已证实（日程）】([来源](https://www.nvidia.com/en-eu/gtc/keynote/))
   - 2026-10-21 — AA 每任务成本最低仍为 K2 Horizon 375B A23B（31 分，成本列 $0.00 系四舍五入、1,109 tok/s）与 Gemma 4 31B，其后 Command A+、Ling 3.0 Tiny【已证实】([来源](https://artificialanalysis.ai/leaderboards/models))
   - 2026-10-16/19 — Anthropic×Google TPU（Project North Star）：约 $600 亿、约 1.5GW，$420 亿优先债由 Broadcom 担保 + $180 亿次级，Blackstone 次级档票息 >10%（四个月前同类 8.5%）【二手】([来源](https://en.ilsole24ore.com/art/anthropic-debt-60-billion-google-and-blackstone-chips-returns-over-10-per-cent-AJ1kwmmB))
@@ -74,6 +83,8 @@
 
 - 状态：关注中
 - 时间线（最新在最上）：
+  - 2026-10-22 — AA 全部条目名加 "with fallback"（Opus 5.5 max / Sonnet 5.5 max / Fable 5.1 max 等），Muse Wonder Full (max) 56 分但成本列空白；榜首分数开始包含路由兜底【已证实】([来源](https://artificialanalysis.ai/leaderboards/models))
+  - 2026-10-22 — 判断："模型排名"已成"配置 + fallback 链"排名，第三方向（配置档/兜底策略/成本口径）缺一不可比【推测】
   - 2026-10-21 — AA 前八里有五个是 Claude 同模型的 reasoning/fallback 配置档（58/56/56/54/53），Sonnet 5.5 从 xhigh 的 52 到 max 的 56【已证实】([来源](https://artificialanalysis.ai/leaderboards/models))
   - 2026-10-21 — 判断："模型排名"越来越像"配置排名"，跨榜横比必须带配置名，否则同一模型差 8 分、成本差一个量级【推测】
   - 2026-10-21 — LMArena W42（10-12~18）位次无变化：gemini-4-argon-high 1525±9 第 1、claude-opus-5.5-high 1507±8 第 2；本轮未抓官方页，二手转述【二手】([来源](https://www.ithome.com/1/014/865.htm))
@@ -89,6 +100,8 @@
 
 - 状态：关注中
 - 时间线（最新在最上）：
+  - 2026-10-22 — DeepSeek 开源生产推理框架 DeepInfer（Apache-2.0，18.5k star、4 commits）：仅支持 V4.1-Flash、仅离线，缺 KV cache/PD 分离/DP 负载均衡，后端 NVIDIA SM100 + 华为 Ascend 950；HN 榜首 2308 分【已证实】([来源](https://github.com/deepseek-ai/DeepInfer))
+  - 2026-10-22 — HF 趋势榜前八五个是图像/语音：flux-3-image-klein-comfy #2（900）、flux-3-image-klein #4（537）、MOSS-Image-SFT/Base 新进（501/446，Apache-2.0）、drama-3 #5（522，从 #3 下滑）【已证实】([来源](https://huggingface.co/api/models?sort=trendingScore&direction=-1&limit=10))
   - 2026-10-21 — HF 趋势榜：DeepSeek-V4.1-Flash-1017 第 1（trendingScore 1765、likes 1,970、downloads 27,737、MIT）；第 2 为 flux-3-image-klein-comfy（828、downloads 439,528），第 3 fishaudio/drama-3（686），Muse-Spark-Open-816B-A42B 第 4（555、downloads 2,592）【已证实】([来源](https://huggingface.co/api/models?sort=trendingScore&direction=-1&limit=10))
   - 2026-10-21 — MiniMax-M3.1-Flash 已进 AA 榜 43 分 / $0.22 / 93 tok/s，权重仍等 10-23【已证实（分数）+二手（权重日期）】([来源](https://artificialanalysis.ai/leaderboards/models))
   - 2026-10-21 — 判断：开放权重的注意力从"更大的 LLM"转向能直接装进工作流的图片/语音模型【推测】
@@ -97,6 +110,13 @@
   - 2026-10-17 — DeepSeek V4.1 Flash-1017 刷新，MIT 许可、价格不变【未获一手证实】([来源](https://flash.jin10.com/detail/20261019103603399800))
   - 2026-10-15 — Meta Muse Spark Open 开放权重 816B/42B active、1M 上下文，自定义许可非 OSI；独立评测尚缺（官方 blog 本轮抓取失败）【未获一手证实】([来源](https://huggingface.co/blog/meta-muse-spark-open))
   - 2026-10-19 — MiniMax M3.1 Flash 上线，主打约 3× 速度、约 70% 降价【二手】([来源](https://news.qq.com/rain/a/20261019A0CWC400))
+
+## 主题：云厂商模型分发与多云采购
+
+- 状态：长期跟踪
+- 时间线（最新在最上）：
+  - 2026-10-22 — Google Cloud 在 model garden 上架 OpenAI GPT-6 Astra / 6.1 Sol / 6 Luna（私有预览）：经 Google Cloud Marketplace 结算、抵扣既有承诺消费并计入 FSP，Codex CLI/Desktop 当天可指向 Gemini 平台推理；Gemini for business 与 Antigravity 接入"即将"；未公布价格、区域、准入标准【已证实】([来源](https://cloud.google.com/blog/products/ai-machine-learning/google-cloud-brings-openai-models-to-customers))
+  - 2026-10-22 — 判断：云厂商从"卖自家模型"变成"卖模型菜单 + 一张账单"，采购单位从供应商变成模型名；模型厂在分发与界面两端同时被夹【推测】
 
 ## 主题：中国 AI 技术出口管制与智能信息服务立法
 
@@ -126,6 +146,7 @@
 
 - 状态：长期跟踪
 - 时间线（最新在最上）：
+  - 2026-10-22 — 中方回应：商务部 10-20 称美方泛化国家安全、要求撤销 DHS 禁令并回到中美 AI 对话机制，声明将"采取一切必要措施"；同日特朗普表态新建大型数据中心须自发电并回馈社区（政策信号，非规则）【二手】([来源](https://english.sdchina.com/show/2112792003685351425.html))
   - 2026-10-21 — DHS 令刊于 91 FR 66346–66350（2026-10-20 刊出，FR Doc 2026-21447，Docket DHS-2026-0628）：依 2018 年 FASCSA 排除 DeepSeek 及关联实体采购，并移除在用产品与"用 DeepSeek 实现开发的第三方产品和服务"；范围限联邦民事机构，不含 DoD、情报口、涉密系统【已证实】([来源](https://www.govinfo.gov/content/pkg/FR-2026-10-20/html/2026-21447.htm))
   - 2026-10-21 — Anthropic 向国会递安全法案草案（Politico 10-16 首报，TechCrunch 10-20 跟进，Anthropic 确认存在）：门槛为"可预见、迫在眉睫"的 >$10 亿损失或 >50 人死亡，限于生物武器、模型逃逸开发者控制、网络攻击三类；评估机构在 Commerce 注册、可收费但不得与结果挂钩，72 小时内上报，仅 Commerce 可向 D.C. 联邦法官申请暂停【二手】([来源](https://techcrunch.com/2026/10/20/anthropic-pitches-ai-safety-bill-that-may-block-a-model-if-50-people-could-be-killed/))
   - 2026-10-21 — 判断：美国侧风险价格从"罚款"落到供应链与模型血统；做公共部门交付要交付 model BOM，公开权重的本地部署界定仍是空白【推测】
