@@ -165,48 +165,41 @@ def main() -> None:
         buttons.append({
             "tag": "button",
             "text": {"tag": "plain_text", "content": "查看完整日报"},
-            "type": "primary_filled",
-            "width": "fill",
-            "behaviors": [{"type": "open_url", "default_url": report_url}],
+            "type": "primary",
+            "url": report_url,
         })
     if themes_url:
         buttons.append({
             "tag": "button",
             "text": {"tag": "plain_text", "content": "主题主线"},
             "type": "default",
-            "behaviors": [{"type": "open_url", "default_url": themes_url}],
+            "url": themes_url,
         })
 
+    # Card 1.0：自定义机器人 webhook 只渲染 1.0。用 2.0 的 schema/body 发出去
+    # 飞书照样返回 StatusCode:0 success，但群里什么都不显示——实测过。
     elements = [
-        {"tag": "markdown", "content": build_markdown(items)},
-        {"tag": "hr"},
+        {"tag": "div",
+         "text": {"tag": "lark_md", "content": f"<font color='grey'>{subtitle}</font>"}},
+        {"tag": "div", "text": {"tag": "lark_md", "content": build_markdown(items)}},
     ]
     if buttons:
-        elements.append({
-            "tag": "column_set",
-            "flex_mode": "bisect",
-            "horizontal_spacing": "small",
-            "columns": [
-                {"tag": "column", "width": "weighted", "weight": 1,
-                 "elements": [b]}
-                for b in buttons
-            ],
-        })
+        elements.append({"tag": "hr"})
+        elements.append({"tag": "action", "actions": buttons})
     else:
         elements.append({
-            "tag": "markdown",
-            "content": "<font color='grey'>完整报告见项目 reports/ 目录</font>",
+            "tag": "div",
+            "text": {"tag": "lark_md",
+                     "content": "<font color='grey'>完整报告见项目 reports/ 目录</font>"},
         })
 
     card = {
-        "schema": "2.0",
-        "config": {"update_multi": True, "width_mode": "default"},
+        "config": {"wide_screen_mode": True},
         "header": {
             "title": {"tag": "plain_text", "content": f"AI Radar · {date}"},
-            "subtitle": {"tag": "plain_text", "content": subtitle},
             "template": "blue",
         },
-        "body": {"direction": "vertical", "elements": elements},
+        "elements": elements,
     }
     print(json.dumps(card, ensure_ascii=False))
 

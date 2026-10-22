@@ -55,6 +55,8 @@ REPORT_BASE_URL=https://github.com/<owner>/ai-radar/blob/main   # 留空则卡�
 
 webhook 配了就走 webhook，`FEISHU_RECEIVER_*` 自动失效，不用删。
 
+> **坑：自定义机器人只认 Card 1.0。** 用 Card 2.0（`"schema": "2.0"` + `body.elements`）发过去，飞书照样返回 `StatusCode:0 / success`，但**群里什么都不显示**，没有任何报错。排查方法：先发一条纯文本确认通道通，再发 1.0 和 2.0 两张极简卡对比。`build-card.py` 现在固定输出 1.0，`selftest.sh` 有断言守着这一点。
+
 **lark-cli（只能内部群/私聊）**
 
 1. 群设置 → 群机器人 → 添加机器人 → 搜应用名（按名字搜，**搜 appId 搜不到**）

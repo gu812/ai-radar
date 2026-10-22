@@ -135,7 +135,7 @@ else
 fi
 LATEST_REPORT="$(ls -t "$PROJECT_DIR"/reports/*.md 2>/dev/null | head -1)"
 if [ -n "$LATEST_REPORT" ]; then
-  check "build-card.py 能从真实报告生成卡片" bash -c "python3 '$PROJECT_DIR/build-card.py' '$LATEST_REPORT' | python3 -c 'import json,sys; d=json.load(sys.stdin); assert d[\"schema\"]==\"2.0\" and d[\"body\"][\"elements\"]'"
+  check "卡片是 Card 1.0 格式（webhook 只认 1.0，2.0 会静默不渲染）" bash -c "python3 '$PROJECT_DIR/build-card.py' '$LATEST_REPORT' | python3 -c 'import json,sys; d=json.load(sys.stdin); assert \"schema\" not in d and d.get(\"elements\") and d.get(\"header\")'"
   check "卡片含今日必读条目" bash -c "python3 '$PROJECT_DIR/build-card.py' '$LATEST_REPORT' | grep -q '条必读'"
 else
   info "尚无报告，跳过卡片生成检查"
