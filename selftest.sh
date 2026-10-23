@@ -86,7 +86,7 @@ MODEL="${AI_RADAR_MODEL:-$(sed -n 's/^MODEL="\${AI_RADAR_MODEL:-\(.*\)}"$/\1/p' 
 info "run.sh 默认模型：${MODEL:-<未解析到>}"
 check "模型在 pi 模型中可见（${MODEL}）" \
   bash -c "pi --list-models 2>/dev/null | awk '{print \$1\"/\"\$2}' | grep -qxF '$MODEL'"
-check "pi-web-search 已安装（提供 web_search）" bash -c "pi list 2>/dev/null | grep -q 'pi-web-search'"
+check "已装提供 web_search 的扩展（pi-web-search 或 pi-web-access）" bash -c "pi list 2>/dev/null | grep -qE 'pi-web-(search|access)'"
 check "pi 凭据 auth.json 存在" test -r "$HOME/.pi/agent/auth.json"
 check "DeepSeek Search API 真实可达" bash -c "
   K=\$(python3 -c \"import json,os;print(json.load(open(os.path.expanduser('~/.pi/agent/auth.json')))['deepseek']['key'])\") &&

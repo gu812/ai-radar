@@ -26,7 +26,13 @@ cd "$PROJECT_DIR" || exit 1
 
 DATE="${1:-$(date +%F)}"
 # BSD date 没有 -d；-j 表示只解析不设时钟
-WEEK_START="$(date -j -v-6d -f "%Y-%m-%d" "$DATE" +%F 2>/dev/null || date -v-6d +%F)"
+# 跨平台日期运算：macOS 用 BSD date -j -v，Linux 用 GNU date -d
+week_start_for() { # <YYYY-MM-DD> → 6 天前
+  date -j -v-6d -f "%Y-%m-%d" "$1" +%F 2>/dev/null \
+    || date -d "$1 -6 days" +%F 2>/dev/null \
+    || date -v-6d +%F
+}
+WEEK_START="$(week_start_for "$DATE")"
 MODEL="${AI_RADAR_MODEL:-deepseek/deepseek-flash}"
 THINKING="${AI_RADAR_THINKING:-medium}"
 RUN_TIMEOUT="${AI_RADAR_TIMEOUT:-1800}"
@@ -67,8 +73,10 @@ run_with_timeout() { # secs cmd...
   perl -e 'alarm shift; exec @ARGV' "$secs" "$@" </dev/null
 }
 
-notify() { # title, body
-  osascript -e "display notification \"${2//\"/\\\"}\" with title \"${1//\"/\\\"}\"" >/dev/null 2>&1 || true
+notify() { # title, body（macOS 桌面通知；Linux 无图形会话时静默跳过）
+  if [ "$(uname -s)" = "Darwin" ]; then
+    osascript -e "display notification \"${2//\"/\\\"}\" with title \"${1//\"/\\\"}\"" >/dev/null 2>&1 || true
+  fi
 }
 
 # 飞书纯文本告警：用于“不是报告失败、而是根本跑不起来”的情况（余额不足、密钥失效）。
@@ -158,7 +166,7 @@ while [ "$attempt" -lt "$ATTEMPTS" ]; do
   # (c) 引文溯源：报告里每条引用 URL 必须在本轮 session 出现过
   total_cited=0; untraceable=0; untraceable_list=""
   if [ -n "$sess_file" ] && [ -f "$REPORT" ]; then
-    _pool="$(mktemp -t airadar-pool)"; _cited="$(mktemp -t airadar-cited)"
+    _pool="$(mktemp "${TMPDIR:-/tmp}/airadar-pool.XXXXXX")"; _cited="$(mktemp "${TMPDIR:-/tmp}/airadar-cited.XXXXXX")"
     grep -oE 'https?://[^"\\ )]+' "$sess_file" | norm_url | LC_ALL=C sort -u >"$_pool"
     grep -oE '\]\(https?://[^)]+\)' "$REPORT" | sed -E 's#^\]\(##; s#\)$##' | norm_url | LC_ALL=C sort -u >"$_cited"
     total_cited=$(grep -c . "$_cited" || true)
@@ -170,7 +178,7 @@ while [ "$attempt" -lt "$ATTEMPTS" ]; do
 
   # (d) 一手取证：标了【一手】的断言行，其引用 URL 必须在本轮真的被 fetch.sh 抓过
   if [ -f "$AI_RADAR_FETCH_LOG" ] && [ -f "$REPORT" ]; then
-    _fpool="$(mktemp -t airadar-fpool)"
+    _fpool="$(mktemp "${TMPDIR:-/tmp}/airadar-fpool.XXXXXX")"
     cut -f1 "$AI_RADAR_FETCH_LOG" | norm_url | LC_ALL=C sort -u >"$_fpool"
     while IFS= read -r _line; do
       _urls="$(printf '%s' "$_line" | grep -oE '\]\(https?://[^)]+\)' | sed -E 's#^\]\(##; s#\)$##')"

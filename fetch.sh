@@ -26,7 +26,24 @@ if [ -z "$PROXY" ]; then
   [ -r "$_cfg" ] && PROXY="$(sed -n 's/^FETCH_PROXY=//p' "$_cfg" 2>/dev/null | head -1)"
 fi
 
-TMP="$(mktemp -t airadar-fetch)"
+# HuggingFace 镜像：境内服务器直连 huggingface.co 不通（000），用 hf-mirror.com 替代。
+# 只在请求时重写 URL，记账仍用原始 URL——否则报告里引用的 huggingface.co 链接
+# 和一手取证的 URL 池对不上，会误判成「未抓取」。
+HF_MIRROR="${HF_MIRROR:-}"
+if [ -z "$HF_MIRROR" ]; then
+  _cfg2="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)/config.env"
+  [ -r "$_cfg2" ] && HF_MIRROR="$(sed -n 's/^HF_MIRROR=//p' "$_cfg2" 2>/dev/null | head -1)"
+fi
+ORIG_URL="$URL"
+if [ -n "$HF_MIRROR" ]; then
+  case "$URL" in
+    https://huggingface.co/*)
+      URL="${HF_MIRROR%/}${URL#https://huggingface.co}"
+      ;;
+  esac
+fi
+
+TMP="$(mktemp "${TMPDIR:-/tmp}/airadar-fetch.XXXXXX")"
 trap 'rm -f "$TMP"' EXIT
 
 # 抓一次，把 HTTP 码与 content-type 打到 stdout
@@ -65,7 +82,7 @@ fi
 # 抓取取证：run.sh 设了 AI_RADAR_FETCH_LOG 就逐次记账，供执行器精确计数
 # （pi 没有 fetch_content 工具，抓取走本脚本，所以计数必须由脚本自己落账）
 if [ -n "${AI_RADAR_FETCH_LOG:-}" ]; then
-  printf '%s\t%s\t%s\n' "$URL" "$code" "$channel" >>"$AI_RADAR_FETCH_LOG" 2>/dev/null || true
+  printf '%s\t%s\t%s\n' "$ORIG_URL" "$code" "$channel" >>"$AI_RADAR_FETCH_LOG" 2>/dev/null || true
 fi
 
 if [ "$code" != "200" ]; then
