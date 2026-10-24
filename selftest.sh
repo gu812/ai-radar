@@ -104,7 +104,8 @@ else
 fi
 echo
 
-echo "[5] 定时任务（launchd）"
+if [ "$(uname -s)" = "Darwin" ]; then
+echo "[5] 定时任务（launchd，macOS）"
 check "仓库内有 plist 模板" test -s "$PLIST_SRC"
 check "plist 已安装到 ~/Library/LaunchAgents" test -s "$PLIST_DST"
 check "plist 语法有效（plutil）" plutil -lint "$PLIST_DST"
@@ -112,6 +113,17 @@ check "plist 配置为 08:30" bash -c "plutil -p '$PLIST_DST' | grep -q '\"Hour\
 check "plist 的 PATH 含 pi 目录" bash -c "plutil -p '$PLIST_DST' | grep -q '.pi/agent/bin'"
 check "launchd 已加载该任务" bash -c "launchctl list | grep -q 'com.gugu.ai-radar'"
 info "launchctl 状态：$(launchctl list | grep 'com.gugu.ai-radar' || echo '<未加载>')"
+else
+echo "[5] 定时任务（cron / systemd timer，Linux）"
+if crontab -l 2>/dev/null | grep -q 'ai-radar/run.sh'; then
+  ok "crontab 已配置 ai-radar"
+  info "cron: $(crontab -l 2>/dev/null | grep 'ai-radar/run.sh')"
+elif systemctl list-timers 2>/dev/null | grep -q 'ai-radar'; then
+  ok "systemd timer 已配置 ai-radar"
+else
+  info "未检测到 cron / systemd timer（定时未配置）"
+fi
+fi
 echo
 
 echo "[6] 飞书推送可达性"
