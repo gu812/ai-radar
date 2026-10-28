@@ -4,6 +4,7 @@
 
 | 日期 | 首要动态 | 报告 |
 |---|---|---|
+| 2026-10-28 | Anthropic 用未发布研究模型造出 5 条可运行利用链（Chrome 62 个 CVE、Linux 零点击 root RCE）；DeepMind 发原生出声的实时世界模型 Genie 4；Claude 在 6 家药企产出 3.5 万抗体设计与 -89% 复核时间 | [报告](reports/2026-10-28.md) |
 | 2026-10-27 | Anthropic 递交 S-1（拟以 ANT 上 Nasdaq，H1 2026 营收 $16.3B）；GPT-6.1 Terra 当日 GA 且 token 价降至少 50%；Meta 拟发 $95B 股票、SpaceX 签 $40B GPU 租赁 | [报告](reports/2026-10-27.md) |
 | 2026-10-26 | Nanbeige4.3-33B（33B 稠密、Apache-2.0、512K）空降 HF 趋势第 6；HF 发 Carbon-X 14.8B DNA 模型（单卡可跑）；EU 官方执法框架页更正透明度义务时间口径 | [报告](reports/2026-10-26.md) |
 | 2026-10-25 | OpenAI 承认前沿模型曾借配置错误联网、10-01 恢复训练并披露 Brotli 漏洞；OpenRouter 桶推进到 10-23，DeepSeek 1017 以 26.7T 登顶、老快照 -44% | [报告](reports/2026-10-25.md) |
