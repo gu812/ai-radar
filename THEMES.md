@@ -17,6 +17,7 @@
 
 - 状态：长期跟踪
 - 时间线（最新在最上）：
+  - 2026-10-29 — AA 榜换到 Intelligence Index v5，同批条目分数与成本全变：Gemini 4 Carbon (high) 59 / $7.76 / 100 tok/s / 首字 103.13s 登顶，Claude Opus 5.5 (max) 58 / $10.04 / 663.66s、(xhigh) 57 / $6.05、GPT-6.1 Astra (max) 57 / $6.24、GPT-6.1 Terra (max) 51 / $0.96、Kimi K3.1 Pro 46 / $3.68（前值 55）、Muse Wonder Full (max) 50 而成本列连续第八天空白、DeepSeek 1017 (max) 32 / $0.60【已证实】【一手】([来源](https://artificialanalysis.ai/leaderboards/models))；判断：版本升级同时改了基准构成与每任务成本（Opus max +68%、Terra max +140%），10-20 至 10-28 的「成本×速度×延迟」三元组结论必须按 v5 重算，不能与旧值并列【推测】
   - 2026-10-28 — AA 榜面四日不动而实时列继续漂移：Opus 5.5 (max) 58 分 / $5.98 / 98 tok/s / 首字 726.85s，Sonnet 5.5 (max) 56 / $5.46 / 140 / 466.37s，Opus (xhigh) 56 / $3.46 / 84 / 128.87s，GPT-6.1 Terra (max) 48 / $0.40 / 91 / 133.64s，Kimi K3.1 Pro 55 / $2.11 但速度 46→41 tok/s（发布首日 81，累计 -49%），Muse Wonder Full (max) 56 分连续第七天成本/速度/延迟全空【已证实】【一手】([来源](https://artificialanalysis.ai/leaderboards/models))；判断：新模型发布一周内速度列仍在收敛，此前只能用同日相对位次；延迟列四日同向抬升更像测量侧负载，不宜写成服务等级【推测】
   - 2026-10-26 — GPT-6.1 Terra 当日 GA 并上 Bedrock，AA 实测四档：max 48 分 / 每任务 $0.40 / 91 tok/s / 首字 131.81s、xhigh 45 / $0.19、high 44 / $0.13、medium 41 / $0.10；同榜 Opus 5.5 (max) 58 / $5.98、Kimi K3.1 Pro 55 / $2.11、Muse Wonder Full 56 成本列连续第六天 `--`【已证实（规格/数字）】【一手】([来源](https://aws.amazon.com/about-aws/whats-new/2026/10/openai-gpt-6-1-terra-on-amazon-bedrock/))([来源](https://artificialanalysis.ai/leaderboards/models))；AWS 口径：token 价至少比 GPT-6.1 Sol 与 GPT-5.6 Terra 低 50%、Agents’ Last Exam 比 5.6 Terra 高 15pp、比 Astra/Sol 快三倍以上（【厂商宣称】）
   - 2026-10-27 — 判断：44–48 分区间被压平——Terra (high) 44 分 / $0.13 与 Sol (low) 42 分 / $0.13 同价但高 2 分，而 Opus 5.5 (max) 58 分 / $5.98 是 10 分差 15 倍价；agent 流水线里可替换的那部分调用整体下移一档【推测】
@@ -26,8 +27,7 @@
   - 2026-10-23 — 低价档出现「同分同价、速度与延迟反向」：Claude Haiku 5.5 (max) 43 分 / $0.21 / 236 tok/s 但首字 325.7s；MiniMax-M3.1-Flash 43 / $0.22 / 96 tok/s、首字 1.52s；Xiaomi MiMo-V2.6-Pro 46 / $0.13 / 53 tok/s【已证实】【一手】([来源](https://artificialanalysis.ai/leaderboards/models))；判断：「每任务成本」单列不足以选型，改为成本×输出速度×首字延迟三元组，批处理与交互式 agent 会选到不同模型【推测】
   - 2026-10-23 — MiniMax M3.1 Flash 官方价与 AA 实测出现"速度口径差"：官方称峰值 200+ TPS / P50 170+，AA 记 93 tok/s、43 分 / $0.22；同榜新增 Muse Wonder (max) 52 分 / $4.52 / 149 tok/s，Muse Wonder Full (max) 56 分成本列仍空白【已证实】【一手】([来源](https://artificialanalysis.ai/leaderboards/models))；判断：厂商自报 TPS 与第三方 TPS 能差一倍以上，"速度"成为继分数、成本之后第三个不能跨源横比的列【推测】
   - 2026-10-22 — AA 榜首五个条目统一改标"with fallback"：Opus 5.5 (max with fallback) 58/$5.98、Sonnet 5.5 (max with fallback) 56/$5.46、Muse Wonder Full (max) 56/成本空白、GPT-6 Astra (max) 53/$3.26、DeepSeek 1017 (max) 45/$0.26【已证实】([来源](https://artificialanalysis.ai/leaderboards/models))；判断：该列已排除 fallback 路由的额外调用，跨配置横比需同时报配置档、fallback 策略与成本口径【已证实+推测】
-  - 2026-10-21 — DeepSeek V4.1 Flash 1017 (max) 45 分 / $0.26 每任务、206 tok/s；同榜 GPT-6.1 Sol (max) 52 分 / $0.72、55 tok/s，(high) 仍 50 / $0.32【已证实】([来源](https://artificialanalysis.ai/leaderboards/models))；判断：低价档前沿位从 $0.32 拉到 $0.26，中端 agent 流水线默认档继续下压【推测】
-  - 2026-10-20 — AA 新增"每任务成本"列：Opus 5.5 (max) 58 分/$5.98、Sonnet 5.5 (xhigh) 52/$2.01、Gemini 4 Argon (high) 53/$1.99、GPT-6.1 Sol (xhigh) 51/$0.39、(high) 50/$0.32【已证实】([来源](https://artificialanalysis.ai/leaderboards/models))；判断：分数差 8 分对应成本差 18 倍，采购按每任务成本走不按分数走【推测】
+  - 2026-10-20 至 10-21 — 压缩存档：AA 新增"每任务成本"列（Opus 5.5 max 58/$5.98、Sonnet 5.5 xhigh 52/$2.01、Gemini 4 Argon high 53/$1.99、GPT-6.1 Sol high 50/$0.32），DeepSeek V4.1 Flash 1017 (max) 45 分 / $0.26 / 206 tok/s；判断：分数差 8 分对应成本差 18 倍，采购按每任务成本走（v5 换版后此组数字不可与 10-29 后并列）【已证实+推测】([来源](https://artificialanalysis.ai/leaderboards/models))
   - 2026-10-13 至 10-19 — 之后趋于沉寂（保留两条骨架）：Santander×NVIDIA 转小模型特化、单次交互 €5→约 €0.03（厂商口径）；Gemini 4 Argon 以 $2/$10 促销价入场、12-01 回到 $4/$20【已证实+推测】([来源](https://www.pymnts.com/news/banking/2026/santander-turns-to-nvidia-to-build-new-ai-banking-capabilities/))([来源](https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/))
 
 ## 主题：Agent 标准治理与互操作层（AAIF）
@@ -43,6 +43,7 @@
 
 - 状态：长期跟踪
 - 时间线（最新在最上）：
+  - 2026-10-29 — 桶推进到 through 10-28：1017 39.6T 第 1（+140%）、V4.1 Flash 16.6T 第 2（-35%）、GLM 5.3 Flash 15T 第 3（+32%）、GPT-6 Luna 9.59T 第 4（+58%，↑2）、Hy4 preview 8.96T（+5%）、Claude Opus 5.5 7.86T 第 6（+10%，↑1）、Step 5 Preview 5.39T 第 7（+132%，新进前十）、GLM 5.3 5.15T（-1%）、Nemotron 3 Ultra (free) 4.44T（0%）、MiMo 4.1T（-52%，↓1）；MiniMax M3.1 Flash (free) 由上桶 12.6T / 第 4 直接跌出前十；应用日榜前十逐位与 10-28 记录完全相同（Hermes 1.98T / Claude Code 1.45T / pi 847B…），疑未刷新【已证实】【一手】([来源](https://openrouter.ai/rankings))；判断：免费档退潮与低价付费档上涨同向，GLM 5.3 Flash 连续两桶压过同门 GLM 5.3，说明「低价 > 大参数」；应用日榜未刷新期间不写涨跌【推测】
   - 2026-10-28 — 桶推进到 through 10-26：1017 35.4T 第 1（+382%，上桶 +801%）、V4.1 Flash 17.4T 第 2（-41%，两者合计 52.8T 高于上桶 51.6T）、GLM 5.3 Flash 13.8T 第 3（+15%，↑1）、MiniMax M3.1 Flash (free) 12.6T 第 4（>999%，↓1）、Hy4 preview 9T（+15%）、GPT-6 Luna 9T 第 6（+44%）、Claude Opus 5.5 8.23T 第 7（+27%）、Nemotron 3 Ultra (free) 5.49T（+18%）、MiMo 5.32T 第 9（-44%，↓1）、GLM 5.3 5.19T（-2%）；应用日榜 Hermes Agent 1.98T 第 1、Claude Code 1.45T 第 2（↑1、+31%）、pi 847B 第 3（↓1、-40%）、Kilo 715B、OpenClaw 402B、Codex 347B 第 6（↑4、+70%）、omp 308B / Strix 304B / DeepSeek Harness 247B 三个仍带 `new`【已证实】【一手】([来源](https://openrouter.ai/rankings))；判断：迁移红利退坡（增速 801%→382%），GLM 5.3 Flash 首次压过 MiniMax 免费档进第 3，是「付费档胜免费额度」的第一个明确信号（单一来源待交叉验证）；编码壳单日 ±50% 的波动大于需求本身，不宜写进选型结论【推测】
   - 2026-10-26 — 桶推进到 through 10-25：1017 33.6T 第 1（+801%）、V4.1 Flash 18T 第 2（-45%，合计 51.6T 高于上桶 47.2T）、MiniMax M3.1 Flash (free) 13.7T 第 3（连续三桶同值）、GLM 5.3 Flash 13.2T（+8%）、Hy4 8.97T（+19%）、GPT-6 Luna 8.35T 第 6（+35%，↑2）、Claude Opus 5.5 8.27T 第 7（+34%，↓1）、MiMo 6.07T（-39%）、Nemotron 3 Ultra (free) 5.85T（+18%）、GLM 5.3 5.05T（-3%）；应用日榜 Claude Code 1.57T 与 Hermes Agent 1.55T 只差 1.3%、pi 746B、Kilo 562B、DeepSeek Harness 351B、Codex 343B、Freebuff 250B、omp 226B（-28%）、OpenClaw 188B、Cline 123B【已证实】【一手】([来源](https://openrouter.ai/rankings))；判断：免费档两周停在 13.7T 同值，「免费额度=发布脉冲」应改为「常驻层或停止刷新的条目」；编码壳两强贴平且整榜同步缩量，可能是桶切换而非需求下滑（单一来源待交叉验证）【推测】
   - 2026-10-25 — 桶推进到 through 10-23：DeepSeek V4.1 Flash 1017 26.7T 第 1（new）、V4.1 Flash 20.5T 第 2（-44%）、MiniMax M3.1 Flash (free) 13.7T 第 3（new）、GLM 5.3 Flash 11.9T（-6%）、Hy4 8.77T（+12%）、Claude Opus 5.5 8.04T 第 6（+35%）、MiMo 7.41T（-32%）、GPT-6 Luna 6.74T（+4%）、Nemotron 3 Ultra (free) 5.43T（-14%）、GLM 5.3 5.02T（-4%）；应用日榜 Claude Code 1.99T、Hermes Agent 1.75T、pi 657B 第 3、Kilo Code 532B（-43%）、Codex 383B、DeepSeek Harness 361B（new）、omp 314B【已证实】【一手】([来源](https://openrouter.ai/rankings))
@@ -53,13 +54,13 @@
   - 2026-10-23 — New & Trending 首周三个新模型：Beam 1.0 501B A23B（Reflection，126B token）、Decider V1.2（Perplexity，111B）、Mercury 3（Inception，101B）；连同 1017、MiniMax free 占前五【已证实】【一手】([来源](https://openrouter.ai/rankings))
   - 2026-10-23 — 判断：免费档日桶 -38% 而周榜 13.7T 仍第 3，说明免费额度是发布后 2–4 天的脉冲而非留存；"降价换不动量"需修正为老快照迁移（23.5T + 21.7T = 45.2T 仍锁前二），编码壳首次集体缩量而 Strix 逆势 +71%，待再一天区分（单一来源待交叉验证）【推测】
   - 2026-10-22 — 周榜（through 10-21）与应用日榜：V4.1 Flash 25.7T 第 1（-31%）、1017 16.5T 第 2（新）、MiniMax M3.1 Flash (free) 10.3T 新上榜、Claude Opus 5.5 7.14T 第 7（+26%）；日榜前十有 8 个非厂商壳：Claude Code 2.11T 第 1、Hermes Agent 2.07T 第 2、Kilo 1.49T、pi 651B、DeepSeek Harness 575B（new）、omp 533B（new）、Strix 252B（new）【已证实】([来源](https://openrouter.ai/rankings))
-  - 2026-10-20 至 10-21 — 压缩存档：10-21 周榜（through 10-20）DeepSeek V4.1 Flash 27.3T 第 1（-32%）、GLM 5.3 Flash 11.6T、1017 11.5T 新上榜、Claude Opus 5.5 6.8T 第 6（+21%）；应用日榜 Claude Code 2.24T 第 1；10-20 AA 榜（through 10-19）Opus 5.5 57.6 / Sonnet 5.5 56.0；当时判断「总量在缩而 Claude 在涨，降价不再带来增量」【已证实+推测】([来源](https://openrouter.ai/rankings))
-  - 2026-10-19 至 10-20 — 周 token 164.0T（环比 -4.65%，11 周连涨后首次下滑）、中国模型 79.18T vs 美国 17.36T，未获一手；判断：价格弹性接近饱和，可靠性（DeepSeek 10 月 5 次事故）比单价更能决定留存【二手+推测】([来源](https://news.iresearch.cn/content/202610/568437.shtml))
+  - 2026-10-19 至 10-21 — 压缩存档：10-21 周榜（through 10-20）V4.1 Flash 27.3T 第 1（-32%）、GLM 5.3 Flash 11.6T、1017 11.5T 新上榜、Opus 5.5 6.8T 第 6（+21%）；周 token 164.0T（环比 -4.65%，11 周连涨后首次下滑）、中国模型 79.18T vs 美国 17.36T（后者未获一手）；判断：价格弹性接近饱和，可靠性比单价更能决定留存【已证实+二手+推测】([来源](https://openrouter.ai/rankings))
 
 ## 主题：Anthropic 产品化路径（Claude Code 为收入主力）
 
 - 状态：关注中
 - 时间线（最新在最上）：
+  - 2026-10-29 — Claude Code 2.1.312（10-27）：移除 2.1.307 刚加的 `claude_code.safety_event` OTel 事件（原覆盖权限规则 / auto mode / hook / 沙箱拦截点），Claude apps gateway 增 `oidc.user_id_claim`（支持 Entra ID `oid`），用量文案由 session limit 改为「5-hour limit」，hook 每会话并发上限 24（含子 agent）、超时排队上限 12，Write 不再只看开头就覆盖超大 CLAUDE.md，修 `paths:` 技能在 bash cd 后失效、无效命令名导致 `claude -p` 无输出，共 22 项修复【已证实】【一手】([来源](https://code.claude.com/docs/en/changelog))；判断：上一版把沙箱拦截点做成遥测、这一版又撤掉，说明该事件在真实企业环境里噪声大于价值，自建审计不能依赖官方事件【推测】
   - 2026-10-26 — Claude Code 2.1.311（10-26）：`self-hosted-runner` 新增 `--hold-idle-file` / `--max-hold-min`；Bedrock/Vertex/Foundry/Mantle 改从 downloads.claude.ai 的签名文件加载模型设置（`CLAUDE_CODE_MODEL_CATALOG=off` 可关）；ultrathink 在 Opus/Sonnet/Haiku 5.5 与 Fable 5.1 上直接以 xhigh 跑该轮；16 项改进 + 56 项修复，含超 200K 请求被误判"需 1M 上下文额度"而中断（改为自动压缩续跑）、Write/Edit 改数千行后卡 5 秒且报"0 行变更"【已证实】【一手】([来源](https://code.claude.com/docs/en/changelog))
   - 2026-10-26 — 判断：模型目录改签名文件 + 自托管 runner 空转保持，指向同一件事——把 CLI 变成可被企业签名管理的运行时组件；这也意味着离线/内网环境要多维护一份签名目录与刷新路径【推测】
   - 2026-10-24 — Claude Code 2.1.310（10-23）：新增 Monitor 工具与 plugin monitors（Bedrock/Vertex/Foundry、遥测关闭时也生效）、长前台 sleep 被拦；Cloud sessions 与 Remote Control 权限进 Enterprise 自定义角色；14 项修复含「符号链接的读取权限提示不显示指向」与 `cleanupPeriodDays` 设成极大值时后台清理误删近期粘贴图片（数据损失级 bug）【已证实】【一手】([来源](https://code.claude.com/docs/en/changelog.md))
@@ -70,13 +71,13 @@
   - 2026-10-22 — 判断：API 版本换代 + 拦截点遥测，是给"自建 gateway 的企业客户"上计量与审计伏笔，与 Codex 的 MCP 企业认证改造同向【推测】
   - 2026-10-21 — Claude Code 2.1.305：新增 `sandbox.allowNestedUserNamespaces`（changelog 原话称可绕过沙箱文件保护）、修 2.1.304 的 tool search 回归（Vertex/Bedrock 请求全失败）、Code Review 复审不再带未关阻塞项直接 LGTM；该页未标发布日期【已证实】([来源](https://code.claude.com/docs/en/changelog.md))
   - 2026-10-20 — Claude Code 2.1.304（10-19）主动加"恢复旧会话会吃掉 5 小时额度"的 Pro/Max 警告；2.1.302（10-16）fork 子 agent 默认开启、`claude -p` 在第三方 provider/遥测关闭/全新安装下默认回 default 权限模式【已证实+二手】([来源](https://code.claude.com/docs/en/changelog.md))
-  - 2026-10-19 — Claude Code 2.1.304：/auto-mode-setup、Code Review 三档、mods 工具权限事件【已证实】([来源](https://code.claude.com/docs/en/changelog.md))
-  - 2026-10-20 — 判断：AA 智能指数前三均为 Claude（57.6/56.0/53.4），而 OpenRouter 请求份额仅 4.7%，但应用 token 榜 Claude Code 以 1.69T 居首——收入走产品不走裸 API【已证实+推测】([来源](https://openrouter.ai/rankings))
+  - 2026-10-19 至 10-20 — 压缩存档：2.1.304 的 /auto-mode-setup、Code Review 三档、mods 工具权限事件；判断：AA 智能指数前三均为 Claude（57.6/56.0/53.4）而 OpenRouter 请求份额仅 4.7%，但应用 token 榜 Claude Code 以 1.69T 居首——收入走产品不走裸 API【已证实+推测】([来源](https://code.claude.com/docs/en/changelog.md))([来源](https://openrouter.ai/rankings))
 
 ## 主题：推理成本曲线与算力投入
 
 - 状态：长期跟踪
 - 时间线（最新在最上）：
+  - 2026-10-29 — 算力融资转向「银团 + 芯片商出资」：Broadcom 组织 $63B 为 Anthropic 部署 XPU（BoA、Blackstone、Citi、Morgan Stanley 牵头），NVIDIA 拟以约 $3B 认购 Meta 扩大后的 $97.5B 增发；Anthropic S-1 把对 SpaceX 的 GPU 付款上限写成 $120.5B（至 2029）；Oracle 称 Google TPU 与 Cerebras 推理 2027 年上 OCI（TPU 首次进他家云）【二手（四处均未取到官方稿）】([来源](https://datacentremagazine.com/news/wall-street-funds-63-bn-broadcom-compute-deal-for-anthropic))([来源](https://compute.world/brief))；判断：约束从「能不能借到钱」变成「谁承担芯片残值」——供应商入股买方、银行做优先级、租赁方持设备，2027 前的报价会先反映这三方风险定价【推测】
   - 2026-10-28 — 逆周期募资：General Compute 完成 $100M A 轮，报道将其与 CoreWeave 跌至 12 个月低点、Musk「200+ neocloud 将被整合」对照（公司公告未取）；Infisical 以 $6 亿估值完成 $40M B 轮（Elad Gil 领投），定位 agent 凭证管理（PR Newswire 公司稿未抓正文）【二手】([来源](https://techcrunch.com/2026/10/27/general-compute-raises-100-million-series-a-countering-the-neocloud-disaster-narrative/))；判断：租赁型算力商的融资能力开始分化——有独立客户合同的能逆势拿钱，靠转租的进入整合期，这个分化会先体现在长约报价的信用溢价上【推测】
   - 2026-10-26 — 同一天三笔资本动作：Meta 拟最高 $95B 股票融资（$35B 承销发行 + $60B ATM，NVIDIA/AMD/Broadcom 作基石合计最多认购 $5B，卖无投票权 C 类股，用途写"AI 基础设施与个人超级智能"）；SpaceX 与 Apollo 管理实体签 $40B 总融资租赁、租期约五年、租 Vera Rubin 一代芯片；Musk 同日称 200+ neocloud 面临"孔雀鱼式死亡与整合"，CoreWeave 约 $35B 债务、股价一月跌超三分之一、Nebius 收跌 3%【二手（SpaceX IR 403、Meta 官方页 404）】([来源](https://www.theguardian.com/technology/2026/oct/26/meta-plans-95bn-stock-offering-to-help-cover-ai-expansion))
   - 2026-10-26 — 判断：芯片单价之外，融资成本与租赁信用利差成为推理报价的新变量；长约报价会先反映租赁利率而不是 Rubin 的代工报价，租赁型算力商的利差可当作推理降价的前置指标【推测】
@@ -87,8 +88,7 @@
   - 2026-10-23 — 判断：capex 压过经营现金流后，采购侧会更看重"每 token 产出 / 每机架 goodput"这类运营指标，而非峰值算力【推测】
   - 2026-10-22 — GTC Berlin：Vera Rubin 上 Google Cloud A5X（NVL72 + ConnectX-9 + 第四代液冷），下月 GA 并扩至欧洲，规划最多 96 万颗 Rubin，首位客户 Ineffable Intelligence；Spectrum-X CPO 以太网交换机进入全面量产【已证实（合作/日程）】([来源](https://blogs.nvidia.com/gtc-berlin-2026-news/))；NVIDIA 口径：3,000 亿美元设备积压、200GW 项目卡在美国并网队列，DSX 卖"把电网与 AI 工厂当一个系统规划"；Revolut 以 PRAGMA 单模型跑 Blackwell Ultra 服务 8,000 万客户【厂商宣称】([来源](https://blogs.nvidia.com/gtc-berlin-2026-news/))
   - 2026-10-22 — 判断：14 天装机解决不了三年并网排队，算力扩张的瓶颈从芯片转到电力接入与变压器交付【推测】
-  - 2026-10-21 — AA 每任务成本最低仍为 K2 Horizon 375B A23B（31 分，成本列 $0.00 系四舍五入）与 Gemma 4 31B，其后 Command A+、Ling 3.0 Tiny；输出速度头名 Celeris-1【已证实】([来源](https://artificialanalysis.ai/leaderboards/models))
-  - 2026-09-22 / 10-16 至 10-20 — 三笔算力与资本动作：Epoch AI 测得固定分数下成本每季度降 47%（≈13×/年），但 agent 单任务几十到上百次调用会吃掉降幅；Anthropic×Google TPU（Project North Star）约 $600 亿 / 1.5GW，次级档票息 >10%；Nscale 与 Anthropic 洽谈 $450 亿 / 460MW（未确认）；Modal $7.5 亿 D 轮 @ $157.5 亿投后【二手+推测】([来源](https://www.stateof.ai/2026-explore/answers/is-ai-inference-getting-cheaper))
+  - 2026-09-22 至 10-21 — 压缩存档：AA 每任务成本最低为 K2 Horizon 375B A23B（31 分，$0.00 系四舍五入）与 Gemma 4 31B，输出速度头名 Celeris-1；Epoch AI 测得固定分数下成本每季度降 47%（≈13×/年），但 agent 单任务数十到上百次调用会吃掉降幅；Anthropic×Google TPU（Project North Star）约 $600 亿 / 1.5GW、次级档票息 >10%；Nscale 与 Anthropic 洽谈 $450 亿 / 460MW（未确认）；Modal $7.5 亿 D 轮 @ $157.5 亿投后【二手+推测】([来源](https://www.stateof.ai/2026-explore/answers/is-ai-inference-getting-cheaper))
 
 ## 主题：EU AI Act 执法化
 
@@ -108,6 +108,7 @@
 
 - 状态：关注中
 - 时间线（最新在最上）：
+  - 2026-10-29 — 本月第二次口径级失真：AA 换到 Intelligence Index v5（官方 10-27 公告称 2 个新基准 + 3 项升级、多数基准改用私有数据集），同批条目分数大幅变动（Kimi 55→46、Gemini 4 Argon 53→50、Muse Wonder Full 56→50、GPT-6.1 Terra 48→51、DeepSeek 1017 45→32），每任务成本同步重算（Opus max $5.98→$10.04、Terra max $0.40→$0.96）【已证实】【一手】([来源](https://artificialanalysis.ai/leaderboards/models))；同日 arena.ai 官方榜返回 403，只能取搜索索引与转述（Carbon (High) 1528±9、Preliminary、4,403 票，对 Argon (High) 1520±6、11,889 票），OpenRouter 应用日榜前十逐位与前一日完全相同、omp/Strix/DeepSeek Harness 继续带 `new`【二手+一手】([来源](https://arena.ai/leaderboard/chat/text))([来源](https://openrouter.ai/rankings))；判断：跨日比较的前提已从「同一配置档」扰展到「同一 Index 版本 + 同一榜单刷新状态」，三者缺一即不可比【推测】
   - 2026-10-28 — 第四日快照：AA 三档分数/成本零变动而首字继续上移（Opus max 712.32→726.85s、Sonnet max 461.94→466.37s、Opus xhigh 121.67→128.87s），Kimi K3.1 Pro 速度第五日 46→41 tok/s（发布首日 81）；OpenRouter 侧 omp / Strix / DeepSeek Harness 连续两日带 `new` 而周榜数值正常推进（桶已到 through 10-26）【已证实】【一手】([来源](https://artificialanalysis.ai/leaderboards/models))([来源](https://openrouter.ai/rankings))；判断：榜单的「实时列」与「标签系统」是两条独立链路，任一链路未对齐就能造出假信号，跨日对比必须先确认桶日期与标签状态【推测】
   - 2026-10-27 — AA 延迟列第三日整体上移（Opus 5.5 max 首字 652.61→712.32s、Sonnet 5.5 max 371.62→461.94s +24%、Opus xhigh 109.62→121.67s），分数与每任务成本全未动；Kimi K3.1 Pro 速度第四日降至 46 tok/s（发布首日 81，累计 -43%），Muse Wonder Full 成本/速度/延迟连续第六天 `--`；同日 LMArena 三家转述源收敛到同一组数（1526 / 1516 / 1513，截至 10-26），Arena Agent 榜份额 Opus 5.5 (Max) 20.77%、Sonnet 5.5 13.99%、GPT-6 Astra 13.96%，10-26 发布的 GPT-6.1 Terra 两榜均未收录【已证实（AA）+二手（LMArena）】【一手+二手】([来源](https://artificialanalysis.ai/leaderboards/models))([来源](https://whatisthelatest.ai/leaderboards/))；判断：文本 Elo 已"多源收敛"，信息量转到 agent 榜与新模型上榜滞后（1–3 天），发布当天只能靠厂商口径【推测】
   - 2026-10-26 — 三类不可比之外补一条「转述差」：同一 LMArena 文本榜，BenchLeader（数据截至 10-25）记 Gemini 4 Argon 1517 / Opus 5.5 1509，昨日 whatisthelatest 记 1526 / 1516，两源差 9 与 7 分，头名差距被读成 17 分或 8 分；AA 侧则出现延迟列同日整体上移 8–16% 而分数不变【已证实（数字）】【二手（LMArena）+一手（AA）】([来源](https://www.benchleader.com/benchmarks/lmarena_text))([来源](https://artificialanalysis.ai/leaderboards/models))；判断：官方榜取不到时，二手转述之间的差比榜内分差还大，跨源位次只能定性（谁在前）不能定量【推测】
@@ -118,13 +119,13 @@
   - 2026-10-23 — 判断：HF 趋势与 LMArena 位次反向（Muse-Spark-Open HF #3→#10，LMArena 仍第 6），"榜上高、生态冷"的开放权重在下游工具链会被跳过【推测】
   - 2026-10-22 — AA 全部条目名加 "with fallback"（Opus 5.5 max / Sonnet 5.5 max / Fable 5.1 max 等），Muse Wonder Full (max) 56 分但成本列空白【已证实】([来源](https://artificialanalysis.ai/leaderboards/models))；判断："模型排名"已成"配置 + fallback 链"排名，配置档/兜底策略/成本口径缺一不可比【推测】
   - 2026-10-21 — AA 前八里有五个是 Claude 同模型的 reasoning/fallback 配置档（58/56/56/54/53），Sonnet 5.5 从 xhigh 的 52 到 max 的 56【已证实】([来源](https://artificialanalysis.ai/leaderboards/models))；判断：该榜更像"配置排名"，跨榜横比必须带配置名，否则同一模型差 8 分、成本差一个量级【已证实+推测】
-  - 2026-10-20 至 10-21 — LMArena W42（10-12~18）位次未变：gemini-4-argon-high 1525±9 第 1、claude-opus-5.5-high 1507±8 第 2，仅差 18 分、票数 4,892 vs 8 万+，前十 Claude 占 7 席；Opus 5.5 Max 首登 Agent Arena 第一（净提升 15.53%、工具幻觉 0.37%）、WebDev 1813；未抓官方页，属二手转述【二手】([来源](https://www.ithome.com/1/014/865.htm))；判断：通用对话 Elo 已进入「拥挤在误差内」阶段，agent/前端榜才有信息量【推测】
-  - 2026-10-16 至 10-20 — 之后趋于沉寂（保留骨架）：LiveNerf 显示 Opus 5.5 前后 10 天漂移在误差内（0.584→0.592）、Muse Wonder 高分但 lava lamp 测试只画出红圆柱（厂商承认未针对 3D 训练）；判断：agent 分数已是「模型+脚手架+重试预算」的复合量【二手+推测】([来源](https://aiwiki.ai/wiki/livenerf))
+  - 2026-10-16 至 10-21 — 压缩存档：LMArena W42（10-12~18）位次未变，gemini-4-argon-high 1525±9 第 1、claude-opus-5.5-high 1507±8 第 2（二手转述）；LiveNerf 显示 Opus 5.5 前后 10 天漂移在误差内（0.584→0.592）、Muse Wonder 高分但 lava lamp 测试只画出红圆柱；判断：通用对话 Elo 进入「拥挤在误差内」阶段，agent 分数是「模型+脚手架+重试预算」的复合量【二手+推测】([来源](https://www.ithome.com/1/014/865.htm))([来源](https://aiwiki.ai/wiki/livenerf))
 
 ## 主题：开放权重生态（中美两侧）
 
 - 状态：关注中
 - 时间线（最新在最上）：
+  - 2026-10-29 — HF 趋势：1017 六连跌（2195→1453→1219→1099→967→920，-58%），但 likes 3,347→3,525、下载 105,667→116,770，且其 GGUF 量化版 ISTA-DASLab/…-GSQ-RCO-GGUF 新进第 7（407 分 / 下载 1,377,570）；flint 830（1,148 / 14,047）、Nanbeige4.3-33B 708（718 / 7,412）、Spark-X2.6-4B 554（849 / 8,222）、MiniMax-M3.1-Flash 419 升第 5（447 / 13,247）、flux-3-image-klein-comfy 410、LTX-2.5 396；第 9–10 名输出被截断未读【已证实】【一手】([来源](https://huggingface.co/api/models?sort=trendingScore&direction=-1&limit=10))；判断：开放权重的采纳路径已可观测——趋势分退潮而下载与量化仓库上行，评估「能不能装」应看 GGUF/AWQ 仓库而非模型主页【推测】
   - 2026-10-28 — HF 趋势：1017 趋势分五连跌（2195→1453→1219→1099→967，-56%），但 likes 3,090→3,347、下载 95,889→105,667 双双创新高；flint 918（958 / 10,574）第 2、Nanbeige4.3-33B 648 升第 3（655 / 4,785）、Spark-X2.6-4B 607 降第 4（777 / 6,191）、flux-3-image-klein-comfy 413、LTX-2.5 404；第 7–10 名本轮输出被截断未读到【已证实】【一手】([来源](https://huggingface.co/api/models?sort=trendingScore&direction=-1&limit=10))；判断：「趋势分」度量边际注意力、「下载」度量存量落地，两者背离说明 1017 已过发布脉冲转入装机期，本周真正在涨的是当周可下载的中小尺寸（33B / 4B）【推测】
   - 2026-10-27 — HF 趋势：1017 趋势分连跌四日（2195→1453→1219→1099，likes 3,090 / 下载 95,889），flint 855、Spark-X2.6-4B 524 升第 3、Nanbeige4.3-33B 521 升第 4（下载 2,787，10-24 建仓时下载为 0）、flux-3-image-klein-comfy 477、LTX-2.5 407、MiniMax-M3.1-Flash 358 升第 7、MOSS-Image-SFT 319【已证实】【一手】([来源](https://huggingface.co/api/models?sort=trendingScore&direction=-1&limit=10))；判断：33B 与 4B 同时上行、发布四天的模型仍在涨，说明注意力集中在"当周可下载"的中小尺寸，"首发即顶峰"的高分大模型热度反而在退【推测】
   - 2026-10-26 — HF 趋势 10-26：1017 仍 #1 但趋势分 1453→1219（likes 2,982 / 下载 85,275）、flint 826、flux-3-image-klein-comfy 504、Spark-X2.6-4B 451（↑1）、LTX-2.5 410、Nanbeige/Nanbeige4.3-33B 365 新上榜第 6（33B 稠密 / Apache-2.0 / 512K 上下文 / 下载 0）、MOSS-Image-SFT 347、MiniMax-M3.1-Flash 341（↑2）、Qwen-Image-2.1-Uncensored 323、Qwen3.8-27B 309（↓2）【已证实】【一手】([来源](https://huggingface.co/api/models?sort=trendingScore&direction=-1&limit=10))；另 Carbon-X（14.8B DNA+文本、Apache-2.0、单卡 80GB、40,960 上下文）模型卡自报五套 DNA 基准 66.7%、单题成本约为 GPT-6.1 Sol 的 1/1800【一手（规格）/厂商宣称（分数）】([来源](https://huggingface.co/HuggingFaceBio/Carbon-X/raw/main/README.md))；判断：注意力从「更大」转向「更小 + 更垂直」——本周新面孔落在 33B / 14.8B / 4B 三档，而 816B 级已跌出前十【推测】
@@ -135,8 +136,7 @@
   - 2026-10-23 — HF 趋势前十换血：4B 模型 XHToken/Spark-X2.6-4B（Apache-2.0，10-19 建仓）以 351 分进 #9；Lightricks LTX-2.5（视频/音频，`license: other`）#6、下载 2,026,951；Muse-Spark-Open-816B-A42B 从 #10（334）跌出榜外（榜尾 323）【已证实】【一手】([来源](https://huggingface.co/api/models?sort=trendingScore&direction=-1&limit=10))；判断：816B 级开放权重已失去社区注意力（自建要的是 4B~40B + 视频/图像），多出一条许可轴——MIT 的 DeepSeek 与带营收门槛的 MiniMax 社区许可不是同一类「开放」【推测】
   - 2026-10-23 — MiniMax M3.1 Flash 开放权重（HF lastModified 2026-10-23T02:26Z）：~428B 总参 / 23B 激活、1M 上下文、原生多模态输入、全程 sparse attention + QAT + DSpark 投机解码；许可 `license: other`（minimax-community）而非 MIT/Apache；首日 likes 57 / 下载 357，未进 HF 趋势前十【已证实】【一手】([来源](https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash/raw/main/README.md))
   - 2026-10-22 — DeepSeek 开源生产推理框架 DeepInfer（Apache-2.0，18.5k star、4 commits）：仅支持 V4.1-Flash、仅离线，缺 KV cache/PD 分离/DP 负载均衡，后端 NVIDIA SM100 + 华为 Ascend 950；HN 榜首 2308 分【已证实】([来源](https://github.com/deepseek-ai/DeepInfer))；同日 HF 趋势前八五个是图像/语音：flux-3-image-klein-comfy #2（900）、flux-3-image-klein #4（537）、MOSS-Image-SFT/Base 新进（501/446）、drama-3 #5（522）【已证实】([来源](https://huggingface.co/api/models?sort=trendingScore&direction=-1&limit=10))
-  - 2026-10-21 — HF 趋势榜 1017 第 1（1765）、flux-3-image-klein-comfy #2、drama-3 #3、Muse-Spark-Open #4；判断：注意力从"更大的 LLM"转向能装进工作流的图片/语音模型，本地 agent 门槛从算力预算变成显存预算【已证实+推测】([来源](https://huggingface.co/api/models?sort=trendingScore&direction=-1&limit=10))
-  - 2026-10-15 至 10-19 — 压缩存档：NVIDIA Nemotron 3.5 Super VL（120B 开放权重，官方称同级快 5×，并预告 Bolt 74B-A9B / Bolt E4B 4GB 于 10-23）；Meta Muse Spark Open 816B/42B active、1M 上下文、自定义许可非 OSI（未获一手）【二手/未获一手】([来源](https://blogs.nvidia.com/blog/nemotron-3-5-super-vl/))
+  - 2026-10-15 至 10-21 — 压缩存档：10-21 趋势榜 1017 第 1（1765）、flux-3-image-klein-comfy #2、drama-3 #3、Muse-Spark-Open #4；NVIDIA Nemotron 3.5 Super VL（120B 开放权重，官方称同级快 5×，预告 Bolt 74B-A9B / Bolt E4B 4GB 于 10-23）；Meta Muse Spark Open 816B/42B active、1M 上下文、自定义许可非 OSI（未获一手）；判断：注意力从"更大的 LLM"转向能装进工作流的图片/语音模型【已证实+二手+推测】([来源](https://huggingface.co/api/models?sort=trendingScore&direction=-1&limit=10))([来源](https://blogs.nvidia.com/blog/nemotron-3-5-super-vl/))
 
 ## 主题：云厂商模型分发与多云采购
 
@@ -159,16 +159,26 @@
 
 - 状态：关注中
 - 时间线（最新在最上）：
+  - 2026-10-29 — 计费口径同日两处变化：GitHub Copilot Fusion GA 后按「实际调用的每个模型」各自标准价计费（付费档限期 30% 折扣），管理员可限定 Fusion 可用模型并设为默认；Claude Code 2.1.312 把用量文案由 “session limit” 改为 “5-hour limit”，并以 `oidc.user_id_claim` 支持 Entra ID `oid` 做人员映射【已证实】【一手】([来源](https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion/))([来源](https://code.claude.com/docs/en/changelog))；判断：多模型编排把账单拆成「每次任务调了几个模型」，按人头不再能预测成本，采购要改为按任务类型配额【推测】
   - 2026-10-28 — GitHub 让 Copilot 支持服务身份：给 GitHub App 授只读 `Copilot Requests` 组织权限并传入短期 installation token，agent 可不依赖登录用户以组织名义调用，用量归属并计费到组织，组织的模型策略/预算/花费控制照常生效，`app_client_id` 可在 AI usage CSV 里审计，随时 suspend/uninstall 撤权（public preview）【已证实】【一手】([来源](https://github.blog/changelog/2026-10-27-github-copilot-supports-server-to-server-authentication/))；判断：计费主体从「人头」变为「工作负载」，这是企业批量部署 agent 的前置条件，也让「按 agent 核算成本」第一次有了官方字段（对比 Claude Code 仍在处理 5 小时额度的用户侧焦虑）【推测】
   - 2026-10-19 — Claude Code issue #103406（已关闭）：多 agent 会话 15 分钟内 195 次 Opus 5.5 请求、3.1M cache read、$4.88，仅改 32 行代码，5 小时额度耗尽；周额度已达 79%【已证实】([来源](https://github.com/anthropics/claude-code/issues/103406))
   - 2026-10-19 — Claude Code 2.1.304 主动新增 Pro/Max "恢复旧会话会消耗 5 小时额度"的警告，厂商侧承认配额焦虑【已证实】([来源](https://code.claude.com/docs/en/changelog.md))
   - 2026-10-19 — openai/codex #54910 汇总周额度异常蒸发（#54704 一小时 24%→96%、#54677 38 秒 +67 点）；用户称 Pro 200 将于 10-30 减半至 10×，官方未确认【社媒线索】([来源](https://github.com/openai/codex/issues/54910))
   - 2026-10-20 — 判断：竞争从"能力"移到"额度表"，订阅制信任将由 telemetry 与计费透明度决定，而不是口碑【推测】
 
+## 主题：模型路由与编排层（“选模型”的替代方案）
+
+- 状态：关注中
+- 时间线（最新在最上）：
+  - 2026-10-29 — GitHub Copilot Fusion 正式 GA（10-28）：模型选择器不再选具体模型，而选 Fusion + 力度档（Standard/High/Max），由系统在 Single（单模型直解）/ Cascade（弱模型起草、质检不过再升级）/ Critique（一稿一评再改写）三种编排间决定；按所调用各模型标准价计费，付费档限期 30% 折扣；企业管理员可限定 Fusion 可用模型、单独关某模型并设为默认；VS Code、Copilot app、Copilot CLI、JetBrains 全量可用；GitHub 口径为 Coding Agent Index 60 分、距 Claude Code + Opus 5.5 Max 两分、成本约一半、token 约一半、耗时少约 40%，AA 同日文章口径一致（2 分差、成本约一半）【已证实（发布/计费）】【一手】([来源](https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion/))([来源](https://artificialanalysis.ai/articles/gemini-4-carbon-new-number-1))；分数/成本对比属 GitHub 自述，标【厂商宣称】
+  - 2026-10-29 — 判断：一旦「路由 + 编排」成为产品默认项，模型榜单的分数差要先折算成成本差/时间差才有意义；企业评估对象从「哪个模型」变为「路由策略 + 允许的模型白名单 + 每任务成本分布」，这也使多模型采购的谈判单位从席位转向任务【推测】
+  - 2026-10-22 — 前置动作：Google Cloud 把 GPT-6 Astra / 6.1 Sol / 6 Luna 放进 Model Garden（私有预览，经济 Google Cloud Marketplace 结算并抵扣承诺消费）——云厂商先把「模型菜单 + 一张账单」做成产品，编排层是其自然延伸【已证实】【一手】([来源](https://cloud.google.com/blog/products/ai-machine-learning/google-cloud-brings-openai-models-to-customers))
+
 ## 主题：Agent 自主性与安全护栏
 
 - 状态：关注中
 - 时间线（最新在最上）：
+  - 2026-10-29 — Claude Code 2.1.312（10-27）摧掩 2.1.307 引入的 `claude_code.safety_event` OTel 事件（原覆盖权限规则、auto mode、安全检查、hook 与沙箱拦截点），同时让自动模型切换覆盖「不认识的自定义部署名」（`CLAUDE_CODE_DISABLE_REFUSAL_FALLBACK=1` 可关），并对 Bedrock/Vertex/Foundry/Mantle 的未知模型名改用精简系统提示【已证实】【一手】([来源](https://code.claude.com/docs/en/changelog))；判断：拦截点遥测上线 5 天即下线，说明「给企业提供审计事件」与「降低误报噪声」在这一层未定案，自建审计需旁路采集【推测】
   - 2026-10-28 — Anthropic Frontier Red Team 用一个未发布的内部研究模型产出 5 条可运行利用链：Chrome（V8 堆破坏 + V8 沙箱逃逸 + CacheStorage 竞争 + FedCM UAF）一键 RCE，已分配并修补 62 个 CVE（全部 critical/high，含 13 个沙箱逃逸、21 个可危及 renderer，至 Chrome 156）；Safari 以纯数据攻击破同源策略（可读 cookie/历史/邮件）；Android 锁屏绕过在实体 Pixel 9 上验证；Windows QUIC 越界读 CVE-2026-33096（远程可崩，估计数百万台在听）；Linux MPTCP 零点击 root RCE CVE-2026-98432（PoC 中 48 分钟泄内核指针、再 5 分钟拿 root shell）；配套公开发布 Claude Code 安全扫描插件并扩大 Cyber Verification Program【已证实】【一手】([来源](https://www.anthropic.com/research/discovering-vulnerabilities-with-claude))；判断：漏洞挖掘已从「专家团队」变为「模型 + 并行扫描 agent 平台」的工程产出，agent 安全预算要前移到「自家代码也在被扫」，且这抬高了在内网跑开放权重做安全扫描的价值（托管 API 上的扫描等于把漏洞细节交给供应商）【推测】
   - 2026-10-27 — Claude Code 2.1.311 把模型目录改成 downloads.claude.ai 的签名文件（Bedrock/Mantle/Vertex/Foundry 生效，`CLAUDE_CODE_MODEL_CATALOG=off` 可关），并给自托管 runner 加 `--hold-idle-file`/`--max-hold-min` 让主机报告"仍有残留进程"时保持会话；同版修 56 项问题【已证实】【一手】([来源](https://code.claude.com/docs/en/changelog))；判断：供应链从"工具链"扩到"模型目录"——签名目录若刷新失败，受影响的是模型映射与上下文窗口判定，企业需把该端点加入出网白名单与回滚演练【推测】
   - 2026-10-26 — 两家编码 CLI 同周修同一类沙箱绕过：Codex CLI 0.164.0（10-23 04:48）加固 macOS 上大小写变体的元数据路径、以及用于定位可执行文件的可替换符号链接，并对远程 Bash/Zsh 会话做凭证遮盖；Claude Code 2.1.309 修的是 `--mcp-config` 可被沙箱内命令改写、`denyWrite` 经符号链接失效；Codex 0.165.0-alpha.1 已在途【已证实】【一手】([来源](https://github.com/openai/codex/releases))；判断：agent 沙箱的失败模式已收敛到「路径解析」，自建 agent 的评审清单应加大小写变体路径与符号链接两项断言【推测】
