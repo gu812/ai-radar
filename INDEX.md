@@ -4,6 +4,7 @@
 
 | 日期 | 首要动态 | 报告 |
 |---|---|---|
+| 2026-10-31 | Claude Code 2.1.314 在任何权限模式下拒写工作目录外路径；Clover-35B-A3B 开源扩散 LM 自测 SWE-bench 73.6、GB300 680 tok/s；OpenRouter 应用日榜 Codex 2.62T 反超 Claude Code；Step 5 Preview 用量第 7 而智能分 29 | [报告](reports/2026-10-31.md) |
 | 2026-10-30 | AA v5 第三日出现「同价不同分」：Sonnet 5.5 (max) $10.02/54 分 与 Opus 5.5 (max) $10.04/58 分同价，省钱抓手移到配置档；OpenRouter 应用日榜 Codex 347B→863B 进前三、LFM3-1.7B 首次进 HF 趋势前四 | [报告](reports/2026-10-30.md) |
 | 2026-10-29 | Gemini 4 Carbon 以 59 分登顶 AA Intelligence Index v5（编码 agent 仍落后 Opus 5.5 三分、未公开发布）；AA 换版 v5 使同一批模型分数全变、跨日对比失效；Copilot Fusion GA 改按任务编排多模型 | [报告](reports/2026-10-29.md) |
 | 2026-10-28 | Anthropic 用未发布研究模型造出 5 条可运行利用链（Chrome 62 个 CVE、Linux 零点击 root RCE）；DeepMind 发原生出声的实时世界模型 Genie 4；Claude 在 6 家药企产出 3.5 万抗体设计与 -89% 复核时间 | [报告](reports/2026-10-28.md) |
