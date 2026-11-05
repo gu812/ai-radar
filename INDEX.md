@@ -4,6 +4,7 @@
 
 | 日期 | 首要动态 | 报告 |
 |---|---|---|
+| 2026-11-05 | Kimi K3.1 Pro 权重其实已于 11-02 落仓（2.8T/104B、1M 上下文、自定义许可），昨日「未落仓」结论撤回；Tencent Hy4 发布（$0.90/$2.70、computer-use、权重「几天内」放）；Cognition SWE-2 Flash 以 RL 前 mid-training 把 Terminal-Bench 4.0 从 0.9% 拉到 20.0%；EU AI Act 自 11-10 起在北爱部分适用 | [报告](reports/2026-11-05.md) |
 | 2026-11-04 | Claude Code 2.1.318 把 IDE 扩展安装改成显式一步并加按开发者 AWS 成本归因；Kimi K3.1 Pro 权重承诺日未落仓、官方自述为开源删网络攻击数据（xdev-bench 90.5%→81.0%）；AA 同批三档分数 +1 而价格不动；Portkey AI 以 965B 首进 OpenRouter 应用日榜第 3 | [报告](reports/2026-11-04.md) |
 | 2026-11-03 | MIT CSAIL 称前沿模型可原生读写权重（Astra 改 0.016% 权重把 Qwen3.5-0.8B 的 MATH-500 从 7.9% 提到 48.1%，HN 1,786 分）；Oracle 递交 $100 亿增发+$100 亿票据当日 -8.8%、CDS 一年 +265%；美团 LongCat-2.5 GA（1.6T/48B 激活、双格式端点、未开权重）；1017 首次带出 AA 每任务成本 $0.60 | [报告](reports/2026-11-03.md) |
 | 2026-11-02 | DeepSeek 开源主动型编码 agent `dsh-superagent`（MIT、7.3k star，自述非官方产品）；OpenAI 合并 ChatGPT/Codex 额度并翻倍 Pro 限额；Apple 确认中国版 Qwen 11-04 beta、12 月随 iOS 27.3 上线；OR 周桶增速减半、Codex 日榜三连降至 247B | [报告](reports/2026-11-02.md) |
