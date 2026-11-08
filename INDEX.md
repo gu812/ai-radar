@@ -4,6 +4,7 @@
 
 | 日期 | 首要动态 | 报告 |
 |---|---|---|
+| 2026-11-08 | 工信部把预置智能体的终端纳入进网管理（OTA 升级须报方案并经专家评估后才可放量、应用须电子签名声明才可被调用）；Microsoft 不续 Oracle 算力租约并收缩 neocloud 名单；OpenAI 首关 $11B @ $1.25 万亿（9 月目标 $30B）；Anthropic 修订 S-1 披露约 $895.4B 承诺支出；Claude Code 2.1.319 关遥测即拒绝 | [报告](reports/2026-11-08.md) |
 | 2026-11-07 | Google 为 Anthropic 在肯塔基的 $19B 租约债务做信用背书（AA+/Aa2、Fluor GMP EPC、2027 末起分期交付）；Kimi K3.1 Pro 上 Amazon Bedrock 且 HF 趋势分 752→968；百度发 ERNIE 5.5 Flash Base（280B/14B、只发预训练检查点）；Claude Personal Finance 经 Plaid 只读接银行账户 | [报告](reports/2026-11-07.md) |
 | 2026-11-06 | OpenAI 把漏洞挖掘做成产品：GPT-6 Cyber 仅对 Daybreak Red 开放并配 $1B 计划（Linux 内核 948 个潜在问题）；Kimi K3.1 Pro 24 小时内从 HF 榜外升到第 1（下载 797→11,658）；Hy4 35 分/$1.03 vs Kimi 46 分/$3.68 同口径首读；OR 日榜 Portkey 1.34T→286B | [报告](reports/2026-11-06.md) |
 | 2026-11-05 | Kimi K3.1 Pro 权重其实已于 11-02 落仓（2.8T/104B、1M 上下文、自定义许可），昨日「未落仓」结论撤回；Tencent Hy4 发布（$0.90/$2.70、computer-use、权重「几天内」放）；Cognition SWE-2 Flash 以 RL 前 mid-training 把 Terminal-Bench 4.0 从 0.9% 拉到 20.0%；EU AI Act 自 11-10 起在北爱部分适用 | [报告](reports/2026-11-05.md) |
