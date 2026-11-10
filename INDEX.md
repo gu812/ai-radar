@@ -4,6 +4,7 @@
 
 | 日期 | 首要动态 | 报告 |
 |---|---|---|
+| 2026-11-10 | Anthropic 发 Claude Fable 5.2 / Mythos 5.2（$8/$40、1M 上下文，AA 首日 65 分登顶）；同日 Claude Code 2.1.321 换默认模型并修三处安全缺陷（MCP OAuth 泄 refresh token、只读 Bash 出沙箱、cp/mv 绕 deny）；Meta Muse Ember 以 36 分 / 每任务 $0.14 切低价档；NVIDIA 联合六家资管建 $500B 算力融资平台、可选兜底 $125B | [报告](reports/2026-11-10.md) |
 | 2026-11-09 | Google 在怀俄明投 $17B 建首个数据中心，702MW 现场燃料电池 + 碳捕集供电；Anthropic 据 FT 以约 $3.4B 买下 1.7GW 燃气发电机；OpenAI 新 Usage Policies 要求网关/路由商 11-20 前获批准并明令禁止蒸馏；EU AI Office 把前沿模型网络风险评测外包给 Capgemini 联合体 | [报告](reports/2026-11-09.md) |
 | 2026-11-08 | 工信部把预置智能体的终端纳入进网管理（OTA 升级须报方案并经专家评估后才可放量、应用须电子签名声明才可被调用）；Microsoft 不续 Oracle 算力租约并收缩 neocloud 名单；OpenAI 首关 $11B @ $1.25 万亿（9 月目标 $30B）；Anthropic 修订 S-1 披露约 $895.4B 承诺支出；Claude Code 2.1.319 关遥测即拒绝 | [报告](reports/2026-11-08.md) |
 | 2026-11-07 | Google 为 Anthropic 在肯塔基的 $19B 租约债务做信用背书（AA+/Aa2、Fluor GMP EPC、2027 末起分期交付）；Kimi K3.1 Pro 上 Amazon Bedrock 且 HF 趋势分 752→968；百度发 ERNIE 5.5 Flash Base（280B/14B、只发预训练检查点）；Claude Personal Finance 经 Plaid 只读接银行账户 | [报告](reports/2026-11-07.md) |
