@@ -4,6 +4,7 @@
 
 | 日期 | 首要动态 | 报告 |
 |---|---|---|
+| 2026-11-12 | Google 把打分拆成独立 API（`gemini-decision-1`，$0.10/1M 输入、不计输出 token、单请求最多 1,000 个 closed-set 问题）；阿里 Qwen4-Max 只开 15 天 Token Plan 预览（1M 上下文、输出上限 393,216）；TSMC 首次直接持股客户（$500M OpenAI + $500M Anthropic）；EU 提出 Digital Fairness Act 并通过沙盒统一规则 | [报告](reports/2026-11-12.md) |
 | 2026-11-11 | Anthropic 定 IPO 价格区间 $70–78（8.25 亿股、隐含 $1.404 万亿、目标 11-19 挂牌）；Gemini 4 Carbon 全面开放且与 Argon 同价 $2/$10、AA 仍 60 分低于 Fable 5.2 的 65；网信办把生成式 AI/算法/深度合成/区块链四项备案并成一个系统；Cursor Projects 转多人 | [报告](reports/2026-11-11.md) |
 | 2026-11-10 | Anthropic 发 Claude Fable 5.2 / Mythos 5.2（$8/$40、1M 上下文，AA 首日 65 分登顶）；同日 Claude Code 2.1.321 换默认模型并修三处安全缺陷（MCP OAuth 泄 refresh token、只读 Bash 出沙箱、cp/mv 绕 deny）；Meta Muse Ember 以 36 分 / 每任务 $0.14 切低价档；NVIDIA 联合六家资管建 $500B 算力融资平台、可选兜底 $125B | [报告](reports/2026-11-10.md) |
 | 2026-11-09 | Google 在怀俄明投 $17B 建首个数据中心，702MW 现场燃料电池 + 碳捕集供电；Anthropic 据 FT 以约 $3.4B 买下 1.7GW 燃气发电机；OpenAI 新 Usage Policies 要求网关/路由商 11-20 前获批准并明令禁止蒸馏；EU AI Office 把前沿模型网络风险评测外包给 Capgemini 联合体 | [报告](reports/2026-11-09.md) |
