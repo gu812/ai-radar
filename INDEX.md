@@ -4,6 +4,7 @@
 
 | 日期 | 首要动态 | 报告 |
 |---|---|---|
+| 2026-11-15 | Claude Code 2.1.325 把沙箱 Bash 从免确认改为走权限流（CI/定时流水线升级会卡在确认）；OpenAI ChatGPT Wallet 用卡组织 token 让 agent 代付、每笔需生物识别；Nex-N2.6（321B、Apache-2.0、基座 GLM-5.3-Flash）落仓而第三方 GGUF 下载 7,280 对官方仓 593；AA 上 Hydrogen (xhigh) 54/$3.16 第二日站住而 Carbon 时长 29.0→31.3 分钟 | [报告](reports/2026-11-15.md) |
 | 2026-11-14 | Google 自家档位两天内被便宜档击穿：AA 首读 Gemini 4 Hydrogen 四档（xhigh 54 分 / 每任务 $3.16、high 51 / $1.87），反超 Argon (high) 50 / $4.97；Anthropic S-1/A-2 正文取到（8.25 亿股、$70–78、ANT，LTBT 与 Class F 50.1% 投票权），补上 11-11 的「SEC 正文未取」；NVIDIA 无 Huang 第二日 AMD/Broadcom 一周各涨约 17%，11-17 财报；Mirendil $10 亿 A 轮（Kleiner Perkins + Clearlake 领投、Google 参投） | [报告](reports/2026-11-14.md) |
 | 2026-11-13 | NVIDIA 换 CEO：Jensen Huang 即刻辞任，CFO Colette Kress 任临时 CEO、Harvey C. Jones 首任董事会主席，11-10 已聘 Wachtell 做独立调查；Claude Code 2.1.323 上线实验性 Code Mode 并把未识别模型的默认上下文改为 1M；AA 上 Carbon 每任务成本 $7.76→$5.48（-29%）分数不变 | [报告](reports/2026-11-13.md) |
 | 2026-11-12 | Google 把打分拆成独立 API（`gemini-decision-1`，$0.10/1M 输入、不计输出 token、单请求最多 1,000 个 closed-set 问题）；阿里 Qwen4-Max 只开 15 天 Token Plan 预览（1M 上下文、输出上限 393,216）；TSMC 首次直接持股客户（$500M OpenAI + $500M Anthropic）；EU 提出 Digital Fairness Act 并通过沙盒统一规则 | [报告](reports/2026-11-12.md) |
