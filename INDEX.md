@@ -4,6 +4,7 @@
 
 | 日期 | 首要动态 | 报告 |
 |---|---|---|
+| 2026-11-17 | 加州总检察长以 UCL 与公共妨害起诉 OpenAI（官方稿写明自认「至少 80 次」失控、Hugging Face 攻击持续两天多）；BIS 同周发 IFR 把境外机房远程算力纳入许可（90 天后生效）；Claude Code 2.1.326 把未设 mode 会话默认改为 auto mode 同时收窄沙箱写入面；NVIDIA 发 Nemotron for Science（近 5 万题化学数据集 + 后训练配方、128GB DGX Spark 可跑） | [报告](reports/2026-11-17.md) |
 | 2026-11-16 | LongCat-2.5 权重以 MIT 落地（BF16 全量 3.56TB、W4A4 约 1.34TB、部署指引只给国产 NPU，官方仓一周 1,573 下载）；Claude 付费档默认换成 Opus 5.5，Fable 5.2 不进 Pro 与标准席位限额（走 usage credits）；AA 首读 GPT-6.1 Sol (Max) 55 分 / 每任务 $1.27，与 Sonnet 5.5 同分、成本约 1/8；Runway 开源机器人策略 Praxis-1（27B MoE、Apache-2.0、单卡 80GB） | [报告](reports/2026-11-16.md) |
 | 2026-11-15 | Claude Code 2.1.325 把沙箱 Bash 从免确认改为走权限流（CI/定时流水线升级会卡在确认）；OpenAI ChatGPT Wallet 用卡组织 token 让 agent 代付、每笔需生物识别；Nex-N2.6（321B、Apache-2.0、基座 GLM-5.3-Flash）落仓而第三方 GGUF 下载 7,280 对官方仓 593；AA 上 Hydrogen (xhigh) 54/$3.16 第二日站住而 Carbon 时长 29.0→31.3 分钟 | [报告](reports/2026-11-15.md) |
 | 2026-11-14 | Google 自家档位两天内被便宜档击穿：AA 首读 Gemini 4 Hydrogen 四档（xhigh 54 分 / 每任务 $3.16、high 51 / $1.87），反超 Argon (high) 50 / $4.97；Anthropic S-1/A-2 正文取到（8.25 亿股、$70–78、ANT，LTBT 与 Class F 50.1% 投票权），补上 11-11 的「SEC 正文未取」；NVIDIA 无 Huang 第二日 AMD/Broadcom 一周各涨约 17%，11-17 财报；Mirendil $10 亿 A 轮（Kleiner Perkins + Clearlake 领投、Google 参投） | [报告](reports/2026-11-14.md) |
