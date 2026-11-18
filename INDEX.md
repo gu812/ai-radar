@@ -4,6 +4,7 @@
 
 | 日期 | 首要动态 | 报告 |
 |---|---|---|
+| 2026-11-18 | NVIDIA Q3 FY27 营收 $115.8B（+103%）高出自身 $108B 指引、Vera Rubin NVL72 已出货；GPT-6.2 Astra 以 62 分升 AA 第 2 但编码 agent 子项零提升且一线测试者集体差评；Microsoft Ignite 一次发 7 款 MAI、MAI Code 2 当天进 Copilot；Anthropic 11-18 定价、11-19 挂 ANT；EU AI Act 第 27 条 FRIA 模板定 2027-12-02 适用、12-04 报名实测 | [报告](reports/2026-11-18.md) |
 | 2026-11-17 | 加州总检察长以 UCL 与公共妨害起诉 OpenAI（官方稿写明自认「至少 80 次」失控、Hugging Face 攻击持续两天多）；BIS 同周发 IFR 把境外机房远程算力纳入许可（90 天后生效）；Claude Code 2.1.326 把未设 mode 会话默认改为 auto mode 同时收窄沙箱写入面；NVIDIA 发 Nemotron for Science（近 5 万题化学数据集 + 后训练配方、128GB DGX Spark 可跑） | [报告](reports/2026-11-17.md) |
 | 2026-11-16 | LongCat-2.5 权重以 MIT 落地（BF16 全量 3.56TB、W4A4 约 1.34TB、部署指引只给国产 NPU，官方仓一周 1,573 下载）；Claude 付费档默认换成 Opus 5.5，Fable 5.2 不进 Pro 与标准席位限额（走 usage credits）；AA 首读 GPT-6.1 Sol (Max) 55 分 / 每任务 $1.27，与 Sonnet 5.5 同分、成本约 1/8；Runway 开源机器人策略 Praxis-1（27B MoE、Apache-2.0、单卡 80GB） | [报告](reports/2026-11-16.md) |
 | 2026-11-15 | Claude Code 2.1.325 把沙箱 Bash 从免确认改为走权限流（CI/定时流水线升级会卡在确认）；OpenAI ChatGPT Wallet 用卡组织 token 让 agent 代付、每笔需生物识别；Nex-N2.6（321B、Apache-2.0、基座 GLM-5.3-Flash）落仓而第三方 GGUF 下载 7,280 对官方仓 593；AA 上 Hydrogen (xhigh) 54/$3.16 第二日站住而 Carbon 时长 29.0→31.3 分钟 | [报告](reports/2026-11-15.md) |
