@@ -4,6 +4,7 @@
 
 | 日期 | 首要动态 | 报告 |
 |---|---|---|
+| 2026-11-19 | Anthropic 以 $83 定价（高于 $70–78 区间）、9.8 亿股、11-19 以 ANT 挂牌；Gemini 4 Neon 发布（$3/$15、AA 61 分第 3 而每任务 $6.44 贵于 Astra 的 $4.00）；OpenRouter 周榜腾讯把 Hy4 拆成两 id，Hy4 flash 46.6T 空降第 2、合计 59.6T 达 1017 的 96%；国内首个昇腾 950DT「词元出海」集群汕头启用，日均 token 1 亿→1000 亿；BCG 26 家 G-SIB 基准：73% 允许 agent 进生产、仅 8% 有全面监控框架 | [报告](reports/2026-11-19.md) |
 | 2026-11-18 | NVIDIA Q3 FY27 营收 $115.8B（+103%）高出自身 $108B 指引、Vera Rubin NVL72 已出货；GPT-6.2 Astra 以 62 分升 AA 第 2 但编码 agent 子项零提升且一线测试者集体差评；Microsoft Ignite 一次发 7 款 MAI、MAI Code 2 当天进 Copilot；Anthropic 11-18 定价、11-19 挂 ANT；EU AI Act 第 27 条 FRIA 模板定 2027-12-02 适用、12-04 报名实测 | [报告](reports/2026-11-18.md) |
 | 2026-11-17 | 加州总检察长以 UCL 与公共妨害起诉 OpenAI（官方稿写明自认「至少 80 次」失控、Hugging Face 攻击持续两天多）；BIS 同周发 IFR 把境外机房远程算力纳入许可（90 天后生效）；Claude Code 2.1.326 把未设 mode 会话默认改为 auto mode 同时收窄沙箱写入面；NVIDIA 发 Nemotron for Science（近 5 万题化学数据集 + 后训练配方、128GB DGX Spark 可跑） | [报告](reports/2026-11-17.md) |
 | 2026-11-16 | LongCat-2.5 权重以 MIT 落地（BF16 全量 3.56TB、W4A4 约 1.34TB、部署指引只给国产 NPU，官方仓一周 1,573 下载）；Claude 付费档默认换成 Opus 5.5，Fable 5.2 不进 Pro 与标准席位限额（走 usage credits）；AA 首读 GPT-6.1 Sol (Max) 55 分 / 每任务 $1.27，与 Sonnet 5.5 同分、成本约 1/8；Runway 开源机器人策略 Praxis-1（27B MoE、Apache-2.0、单卡 80GB） | [报告](reports/2026-11-16.md) |
