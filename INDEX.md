@@ -4,6 +4,7 @@
 
 | 日期 | 首要动态 | 报告 |
 |---|---|---|
+| 2026-11-20 | ANT 首日收 $97.17（+17.07%）守住发行价但较开盘 $111.50 回吐约 13%、盘后 $92.52；腾讯把 Hy4 flash 权重开源（220B/12B 激活、1M、Tencent Hy License）而同周它以 69.3T 升 OR 周榜第 1（家族合计 81T，为 1017 的 130%）；Claude Code 2.1.329 打通 Code Mode 与 OTel 事件；GitHub 星速三连降但 skill 仓占加速榜前五中的四个；HF 榜首分 457→309 而 Haru-4B likes 606→3,027 | [报告](reports/2026-11-20.md) |
 | 2026-11-19 | Anthropic 以 $83 定价（高于 $70–78 区间）、9.8 亿股、11-19 以 ANT 挂牌；Gemini 4 Neon 发布（$3/$15、AA 61 分第 3 而每任务 $6.44 贵于 Astra 的 $4.00）；OpenRouter 周榜腾讯把 Hy4 拆成两 id，Hy4 flash 46.6T 空降第 2、合计 59.6T 达 1017 的 96%；国内首个昇腾 950DT「词元出海」集群汕头启用，日均 token 1 亿→1000 亿；BCG 26 家 G-SIB 基准：73% 允许 agent 进生产、仅 8% 有全面监控框架 | [报告](reports/2026-11-19.md) |
 | 2026-11-18 | NVIDIA Q3 FY27 营收 $115.8B（+103%）高出自身 $108B 指引、Vera Rubin NVL72 已出货；GPT-6.2 Astra 以 62 分升 AA 第 2 但编码 agent 子项零提升且一线测试者集体差评；Microsoft Ignite 一次发 7 款 MAI、MAI Code 2 当天进 Copilot；Anthropic 11-18 定价、11-19 挂 ANT；EU AI Act 第 27 条 FRIA 模板定 2027-12-02 适用、12-04 报名实测 | [报告](reports/2026-11-18.md) |
 | 2026-11-17 | 加州总检察长以 UCL 与公共妨害起诉 OpenAI（官方稿写明自认「至少 80 次」失控、Hugging Face 攻击持续两天多）；BIS 同周发 IFR 把境外机房远程算力纳入许可（90 天后生效）；Claude Code 2.1.326 把未设 mode 会话默认改为 auto mode 同时收窄沙箱写入面；NVIDIA 发 Nemotron for Science（近 5 万题化学数据集 + 后训练配方、128GB DGX Spark 可跑） | [报告](reports/2026-11-17.md) |
