@@ -4,6 +4,7 @@
 
 | 日期 | 首要动态 | 报告 |
 |---|---|---|
+| 2026-11-21 | Thinking Machines 发 Inkling 2 Mini（26.4B/3.4B、循环 transformer、约 20GB、开放权重），同日 SenseNova-Loop-9B 与 Nemotron-Labs-Sigma 落仓；撤回「Hy4 flash 登顶 OR」——同桶读数冲突、Hy4 flash 周内仅 417B，1017 58.5T 仍第 1；Claude Code 2.1.330 把企业 org 管控写进登录流程；GitHub 星速止跌（+191,371）但加速榜前十换掉 8 个 | [报告](reports/2026-11-21.md) |
 | 2026-11-20 | ANT 首日收 $97.17（+17.07%）守住发行价但较开盘 $111.50 回吐约 13%、盘后 $92.52；腾讯把 Hy4 flash 权重开源（220B/12B 激活、1M、Tencent Hy License）而同周它以 69.3T 升 OR 周榜第 1（家族合计 81T，为 1017 的 130%）；Claude Code 2.1.329 打通 Code Mode 与 OTel 事件；GitHub 星速三连降但 skill 仓占加速榜前五中的四个；HF 榜首分 457→309 而 Haru-4B likes 606→3,027 | [报告](reports/2026-11-20.md) |
 | 2026-11-19 | Anthropic 以 $83 定价（高于 $70–78 区间）、9.8 亿股、11-19 以 ANT 挂牌；Gemini 4 Neon 发布（$3/$15、AA 61 分第 3 而每任务 $6.44 贵于 Astra 的 $4.00）；OpenRouter 周榜腾讯把 Hy4 拆成两 id，Hy4 flash 46.6T 空降第 2、合计 59.6T 达 1017 的 96%；国内首个昇腾 950DT「词元出海」集群汕头启用，日均 token 1 亿→1000 亿；BCG 26 家 G-SIB 基准：73% 允许 agent 进生产、仅 8% 有全面监控框架 | [报告](reports/2026-11-19.md) |
 | 2026-11-18 | NVIDIA Q3 FY27 营收 $115.8B（+103%）高出自身 $108B 指引、Vera Rubin NVL72 已出货；GPT-6.2 Astra 以 62 分升 AA 第 2 但编码 agent 子项零提升且一线测试者集体差评；Microsoft Ignite 一次发 7 款 MAI、MAI Code 2 当天进 Copilot；Anthropic 11-18 定价、11-19 挂 ANT；EU AI Act 第 27 条 FRIA 模板定 2027-12-02 适用、12-04 报名实测 | [报告](reports/2026-11-18.md) |
