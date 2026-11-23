@@ -4,6 +4,7 @@
 
 | 日期 | 首要动态 | 报告 |
 |---|---|---|
+| 2026-11-23 | Lean 与 Mathlib 社区正式认证 Alpöge 的 Riemann 猜想证明（17M 行 Lean、四项条件、多 checker 复核）；补上 Anthropic IPO 收盘（IPO $93.5B + 向 NVIDIA/Google/AMD 等 7 家私募 Class N 约 $26.0B，合计约 $119.5B）；OR 周榜 Hy4 flash 以 10.2T 回第 4、腾讯请求份额 2.3%→11.7%；HF 一个基座占前三席（Inkling-2-Mini 与其 GGUF 下载 80 万） | [报告](reports/2026-11-23.md) |
 | 2026-11-22 | 周五 AI 股重挫：Nasdaq 单日 -5.28%（周 -10%）、NVDA 收 $128.37/-12.06%、ANT $88.91/-8.50%，起因是 Reuters 报道 SEC 调查 NVIDIA 会计（一手行情与二手报道口径不一致）；国家数据局要把「词元」变成有标准的结算单位（计量计费 + 质量测评标准）；Genie 4 进 Gemini API（720p/24fps 可操控世界 + 同步音频）；AA 恢复可读但 Argon 每任务成本 $4.97→$9.95（恰为 12-01 生效的翻倍），榜单成本列不可比价 | [报告](reports/2026-11-22.md) |
 | 2026-11-21 | Thinking Machines 发 Inkling 2 Mini（26.4B/3.4B、循环 transformer、约 20GB、开放权重），同日 SenseNova-Loop-9B 与 Nemotron-Labs-Sigma 落仓；撤回「Hy4 flash 登顶 OR」——同桶读数冲突、Hy4 flash 周内仅 417B，1017 58.5T 仍第 1；Claude Code 2.1.330 把企业 org 管控写进登录流程；GitHub 星速止跌（+191,371）但加速榜前十换掉 8 个 | [报告](reports/2026-11-21.md) |
 | 2026-11-20 | ANT 首日收 $97.17（+17.07%）守住发行价但较开盘 $111.50 回吐约 13%、盘后 $92.52；腾讯把 Hy4 flash 权重开源（220B/12B 激活、1M、Tencent Hy License）而同周它以 69.3T 升 OR 周榜第 1（家族合计 81T，为 1017 的 130%）；Claude Code 2.1.329 打通 Code Mode 与 OTel 事件；GitHub 星速三连降但 skill 仓占加速榜前五中的四个；HF 榜首分 457→309 而 Haru-4B likes 606→3,027 | [报告](reports/2026-11-20.md) |
